@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { LoadingProvider } from "@/components/ui/LoadingContext";
+import { LuminousLoader } from "@/components/ui/LuminousLoader";
+import { ContentReveal } from "@/components/ui/ContentReveal";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -25,8 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cormorant.variable} ${jetbrains.variable} antialiased`}>
-        {children}
+      <body className={`${cormorant.variable} ${jetbrains.variable} antialiased overflow-hidden bg-obsidian`}>
+        <LoadingProvider>
+          <LuminousLoader />
+          <ContentReveal>
+            {children}
+          </ContentReveal>
+        </LoadingProvider>
       </body>
     </html>
   );

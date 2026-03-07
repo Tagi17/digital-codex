@@ -21,10 +21,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow: hidden;
-  font-size: 18px; /* Increased base scale */
+  font-size: 18px;
 }
 
-/* Glassmorphism utility - Enhanced for readability */
+/* Custom Utilities */
+.bg-obsidian-depth { 
+  background: radial-gradient(circle, #0A0A0A 0%, #050505 100%); 
+}
+
+/* Glassmorphism utility */
 .glass {
   background: rgba(5, 5, 5, 0.85);
   backdrop-filter: blur(16px);
