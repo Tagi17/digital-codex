@@ -1,0 +1,32 @@
+[
+  {
+    "id": "heart-energy",
+    "title": "Heart Energy Torus",
+    "tags": ["electromagnetism", "spirituality"],
+    "synthesis": {
+      "electromagnetism": "The heart generates the body's strongest rhythmic electromagnetic field, acting as a broadcast station for biological signals.",
+      "spirituality": "Ancient traditions view the heart as the seat of consciousness, a bridge between the physical and the subtle energetic realms."
+    },
+    "coordinates": { "x": 50, "y": 30 }
+  },
+  {
+    "id": "bio-electricity",
+    "title": "Cellular Bio-electricity",
+    "tags": ["electromagnetism", "physiology"],
+    "synthesis": {
+      "electromagnetism": "Ionic currents at the cellular level create the fundamental spark of life, governed by the same laws as planetary magnets.",
+      "physiology": "Neural firing and muscular contraction are the manifestations of delicate electrical gradients across thin biological membranes."
+    },
+    "coordinates": { "x": 30, "y": 70 }
+  },
+  {
+    "id": "ancient-prayer",
+    "title": "Vibrational Intent",
+    "tags": ["spirituality", "intent"],
+    "synthesis": {
+      "spirituality": "The sonic resonance of sacred chants aligns with universal frequencies, harmonizing the observer with the observed.",
+      "intent": "Structured conscious focus acts as a quantum coherent state, collapsing possibilities into a singular, directed manifestation."
+    },
+    "coordinates": { "x": 70, "y": 70 }
+  }
+]

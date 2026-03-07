@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #050505;
+  --color-auric-gold: #D4AF37;
+  --color-bio-cyan: #00F5FF;
+  
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --background: var(--color-obsidian);
+  --foreground: #ffffff;
+}
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow: hidden;
+  font-size: 18px; /* Increased base scale */
+}
+
+/* Glassmorphism utility - Enhanced for readability */
+.glass {
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
