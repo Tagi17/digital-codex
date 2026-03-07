@@ -1,6 +1,6 @@
 # The Luminous Archive: Digital Codex
 
-The Luminous Archive is a high-end digital repository and research platform dedicated to the study of Bio-Electromagnetism and the Science of Human Coherence. 
+The Luminous Archive is a digital repository and research platform dedicated to the study of Bio-Electromagnetism and the Science of Human Coherence. 
 
 By bridging the gap between ancient metaphysical frameworks and modern biophysics, the Codex provides a structured, empirical look at how energy fields—both internal and universal—affect physical biology and human consciousness.
 
