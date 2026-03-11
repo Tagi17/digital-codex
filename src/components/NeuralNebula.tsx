@@ -98,7 +98,7 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       .force("charge", d3.forceManyBody().strength(-1000))
       .force("collide", d3.forceCollide().radius(100))
       .velocityDecay(0.15)
-      .alphaDecay(0.02) // Organic settling
+      .alphaDecay(0.02)
       .on("tick", () => {
         setSimNodes([...simulationNodes]);
       });
@@ -127,43 +127,37 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
   // Canvas Drawing Logic
   const draw = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.clearRect(0, 0, width, height);
-    const time = Date.now() / 1000;
 
     nodes.forEach(node => {
       node.links?.forEach(targetId => {
+        // Render Guard: Verify source and target nodes exist in the nodes array
+        const sourceNodeExists = nodes.some(n => n.id === node.id);
+        const targetNodeExists = nodes.some(n => n.id === targetId);
+        if (!sourceNodeExists || !targetNodeExists) return;
+
         const sourceNode = simNodes.find(n => n.id === node.id);
         const targetNode = simNodes.find(n => n.id === targetId);
 
         if (sourceNode && targetNode) {
-          const isSourceHovered = hoveredNodeId === node.id;
-          const isTargetHovered = hoveredNodeId === targetId;
-          const isCellularActive = hoveredNodeId === 'cellular-bio-electricity' && (node.id === 'cellular-bio-electricity' || targetId === 'cellular-bio-electricity');
+          const isConnectedToHover = hoveredNodeId && (node.id === hoveredNodeId || targetId === hoveredNodeId);
 
           ctx.beginPath();
-          // Organic curved links mimicking axonal pathways
           const midX = (sourceNode.x + targetNode.x) / 2 + (targetNode.y - sourceNode.y) * 0.1;
           const midY = (sourceNode.y + targetNode.y) / 2 + (sourceNode.x - targetNode.x) * 0.1;
           
           ctx.moveTo(sourceNode.x, sourceNode.y);
           ctx.quadraticCurveTo(midX, midY, targetNode.x, targetNode.y);
 
-          if (isCellularActive) {
-            const pulse = 0.4 + Math.sin(time * 4) * 0.3;
-            ctx.strokeStyle = '#00F5FF';
-            ctx.lineWidth = 2.5;
-            ctx.globalAlpha = pulse;
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = '#00F5FF';
-          } else if (isSourceHovered || isTargetHovered) {
-            ctx.strokeStyle = '#D4AF37';
+          if (isConnectedToHover) {
+            ctx.strokeStyle = '#D4AF37'; // Gold
             ctx.lineWidth = 1.8;
-            ctx.globalAlpha = 0.7;
+            ctx.globalAlpha = 0.8;
             ctx.shadowBlur = 10;
             ctx.shadowColor = '#D4AF37';
           } else {
-            ctx.strokeStyle = '#00F5FF';
+            ctx.strokeStyle = '#00F5FF'; // Electric Cyan
             ctx.lineWidth = 0.5;
-            ctx.globalAlpha = 0.05; // Faint ghost filament
+            ctx.globalAlpha = 0.1; // 10% Opacity for inactive
             ctx.shadowBlur = 0;
           }
 
@@ -248,12 +242,12 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       <div className="absolute top-16 left-16 z-30 pointer-events-none">
         <h1 className="text-auric-gold text-3xl tracking-[0.5em] uppercase mb-3">The Luminous Codex</h1>
         <div className="h-[1px] w-32 bg-bio-cyan/40 mb-3" />
-        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.1.0</p>
+        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.1.1</p>
       </div>
 
       <div className="absolute bottom-16 left-16 z-30 pointer-events-none">
         <p className="text-white/30 font-mono text-[10px] uppercase tracking-[0.4em]">
-          Trace axonal pathways. Click "Cellular Bio-Electricity" to expand synthesis.
+          Trace axonal pathways. Click nodes to expand synthesis.
         </p>
       </div>
 
