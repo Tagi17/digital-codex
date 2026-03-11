@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useMemo, useState } from 'react';
+import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 import { NodeData, useNebula } from '@/hooks/useNebula';
 import { Node } from './ui/Node';
 import { SynthesisTooltip } from './ui/SynthesisTooltip';
@@ -9,9 +10,46 @@ import { CustomCursor } from './ui/CustomCursor';
 interface NeuralNebulaProps {
   nodes: NodeData[];
   onNodeClick?: (node: NodeData) => void;
+  isOverlayActive?: boolean;
 }
 
-export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
+const NodeTooltip = ({ content, visible }: { content: string; visible: boolean }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+          className="fixed z-[100] pointer-events-none glass p-4 max-w-[280px] border border-auric-gold/30 shadow-2xl"
+          style={{ x, y, translateX: 20, translateY: 20 }}
+        >
+          <p className="text-[11px] leading-relaxed text-auric-gold font-mono uppercase tracking-[0.1em]">
+            {content}
+          </p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: NeuralNebulaProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
     hoveredNodeId,
@@ -21,14 +59,14 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
     hoveredNode,
     selectedNode,
     isRelated,
-    getSharedTags
   } = useNebula(nodes);
 
-  // Trigger parent callback when node is selected
+  // Trigger parent callback only for "Bio-Electric Journey"
   useEffect(() => {
     if (selectedNode && onNodeClick) {
-      onNodeClick(selectedNode);
-      // Reset local selection so it can be re-triggered if needed
+      if (selectedNode.articleId === 'intent-to-aura') {
+        onNodeClick(selectedNode);
+      }
       setSelectedNodeId(null);
     }
   }, [selectedNode, onNodeClick, setSelectedNodeId]);
@@ -40,7 +78,6 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
     visible: false
   });
 
-  // Pre-calculate filaments (pairs of nodes with shared tags)
   const filaments = useMemo(() => {
     const pairs: { a: NodeData; b: NodeData; tags: string[] }[] = [];
     for (let i = 0; i < nodes.length; i++) {
@@ -55,9 +92,10 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
   }, [nodes]);
 
   useEffect(() => {
+    if (isOverlayActive) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -75,7 +113,6 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Draw Filaments
       filaments.forEach(({ a, b, tags }) => {
         const ax = (a.coordinates.x / 100) * width;
         const ay = (a.coordinates.y / 100) * height;
@@ -91,15 +128,13 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
         ctx.lineTo(bx, by);
         
         if (isGlow) {
-          ctx.strokeStyle = '#D4AF37'; // Auric Gold
+          ctx.strokeStyle = '#D4AF37';
           ctx.lineWidth = 1.5;
           ctx.globalAlpha = 0.8;
-          
-          // Shadow for glow effect
           ctx.shadowBlur = 10;
           ctx.shadowColor = '#D4AF37';
         } else {
-          ctx.strokeStyle = '#00F5FF'; // Bio-Electric Cyan
+          ctx.strokeStyle = '#00F5FF';
           ctx.lineWidth = 0.5;
           ctx.globalAlpha = 0.05;
           ctx.shadowBlur = 0;
@@ -113,18 +148,14 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
 
     render();
     return () => cancelAnimationFrame(animationFrameId);
-  }, [filaments, hoveredNodeId, hoveredNode]);
+  }, [filaments, hoveredNodeId, hoveredNode, isOverlayActive]);
 
-  // Handle Tooltip Positioning on Mouse Move
   useEffect(() => {
-    if (!hoveredNode) {
+    if (!hoveredNode || hoveredNode.id === 'bio-electric-journey') {
       setTooltip(prev => ({ ...prev, visible: false }));
       return;
     }
 
-    // Logic to find the midpoint of the active filament if possible, 
-    // but the prompt says "precisely over a glowing Filament when hovered".
-    // Since we hover the NODE, we'll show the synthesis for the first shared tag.
     const primaryTag = hoveredNode.tags[0];
     setTooltip({
       content: hoveredNode.synthesis[primaryTag] || 'Establishing resonance...',
@@ -134,16 +165,18 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
     });
   }, [hoveredNode]);
 
+  const showSpecialTooltip = hoveredNodeId === 'bio-electric-journey';
+
   return (
-    <div className="relative w-full h-screen bg-obsidian overflow-hidden font-serif">
-      <CustomCursor />
-      {/* Background Canvas */}
+    <div className={`relative w-full h-screen bg-obsidian overflow-hidden font-serif ${isOverlayActive ? 'pointer-events-none' : ''}`}>
+      {!isOverlayActive && <CustomCursor />}
+      
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+        className="absolute inset-0 w-full h-full z-10 pointer-events-none transition-opacity duration-700"
+        style={{ opacity: isOverlayActive ? 0.3 : 1 }}
       />
 
-      {/* Nodes Layer */}
       <div className="absolute inset-0 z-20">
         {nodes.map(node => (
           <Node
@@ -159,20 +192,21 @@ export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
         ))}
       </div>
 
-      {/* Tooltip */}
       <SynthesisTooltip {...tooltip} />
+      <NodeTooltip 
+        visible={showSpecialTooltip} 
+        content="A deep-dive into the transition from neural intent to the manifestation of the human biofield." 
+      />
 
-      {/* HUD / Branding */}
       <div className="absolute top-16 left-16 z-30 pointer-events-none">
         <h1 className="text-auric-gold text-3xl tracking-[0.5em] uppercase mb-3">The Luminous Codex</h1>
         <div className="h-[1px] w-32 bg-bio-cyan/40 mb-3" />
-        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.0.4</p>
+        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.0.5</p>
       </div>
 
-      {/* Navigation Instruction */}
       <div className="absolute bottom-16 left-16 z-30 pointer-events-none">
         <p className="text-white/30 font-mono text-[10px] uppercase tracking-[0.4em]">
-          Hover nodes to trace filaments. Click to synthesize data.
+          Hover nodes to trace filaments. Click "Bio-Electric Journey" to synthesize data.
         </p>
       </div>
     </div>

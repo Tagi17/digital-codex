@@ -1,32 +1,37 @@
 [
   {
-    "id": "heart-energy",
-    "title": "Heart Energy Torus",
-    "tags": ["electromagnetism", "spirituality"],
+    "id": "bio-electric-journey",
+    "title": "Bio-Electric Journey",
+    "articleId": "intent-to-aura",
+    "tags": ["Biofield", "Neural Intent", "Aura"],
     "synthesis": {
-      "electromagnetism": "The heart generates the body's strongest rhythmic electromagnetic field, acting as a broadcast station for biological signals.",
-      "spirituality": "Ancient traditions view the heart as the seat of consciousness, a bridge between the physical and the subtle energetic realms."
+      "Biofield": "Mapping the transition from neural intent to bio-electromagnetic manifestation.",
+      "Neural Intent": "The spark of consciousness preceding physical action.",
+      "Aura": "The externalized energy field of the human system."
     },
-    "coordinates": { "x": 50, "y": 30 }
+    "coordinates": { "x": 50, "y": 50 },
+    "links": ["quantum-coherence", "biofield-dynamics"]
   },
   {
-    "id": "bio-electricity",
-    "title": "Cellular Bio-electricity",
-    "tags": ["electromagnetism", "physiology"],
+    "id": "quantum-coherence",
+    "title": "Quantum Coherence",
+    "tags": ["Quantum", "Coherence"],
     "synthesis": {
-      "electromagnetism": "Ionic currents at the cellular level create the fundamental spark of life, governed by the same laws as planetary magnets.",
-      "physiology": "Neural firing and muscular contraction are the manifestations of delicate electrical gradients across thin biological membranes."
+      "Quantum": "Subatomic synchronization within biological tissues.",
+      "Coherence": "Wave-state alignment of cellular biophotons."
     },
-    "coordinates": { "x": 30, "y": 70 }
+    "coordinates": { "x": 30, "y": 30 },
+    "links": ["bio-electric-journey"]
   },
   {
-    "id": "ancient-prayer",
-    "title": "Vibrational Intent",
-    "tags": ["spirituality", "intent"],
+    "id": "biofield-dynamics",
+    "title": "Biofield Dynamics",
+    "tags": ["Dynamics", "Aura"],
     "synthesis": {
-      "spirituality": "The sonic resonance of sacred chants aligns with universal frequencies, harmonizing the observer with the observed.",
-      "intent": "Structured conscious focus acts as a quantum coherent state, collapsing possibilities into a singular, directed manifestation."
+      "Dynamics": "Fluid motion of electromagnetic gradients.",
+      "Aura": "The radiating boundary of the bio-resonant field."
     },
-    "coordinates": { "x": 70, "y": 70 }
+    "coordinates": { "x": 70, "y": 40 },
+    "links": ["bio-electric-journey"]
   }
 ]

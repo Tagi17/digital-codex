@@ -17,6 +17,7 @@ export default function Home() {
         <NeuralNebula 
           nodes={nodesData as unknown as NodeData[]} 
           onNodeClick={(node) => setSelectedNode(node)}
+          isOverlayActive={!!selectedNode}
         />
       </div>
 

@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react';
 export interface NodeData {
   id: string;
   title: string;
+  articleId?: string;
   tags: string[];
   synthesis: Record<string, string>;
   coordinates: { x: number; y: number };
