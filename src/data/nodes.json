@@ -1,37 +1,48 @@
 [
   {
+    "id": "vibrational-intent",
+    "title": "Vibrational Intent",
+    "tags": ["Neural Intent", "Vibration"],
+    "synthesis": {
+      "Neural Intent": "The subtle electromagnetic precursor to cognitive resonance.",
+      "Vibration": "Harmonic oscillations within the synaptic cleft."
+    },
+    "coordinates": { "x": 800, "y": 600 },
+    "links": ["bio-electric-journey"]
+  },
+  {
+    "id": "cellular-bio-electricity",
+    "title": "Cellular Bio-Electricity",
+    "tags": ["Biofield", "Electricity"],
+    "synthesis": {
+      "Biofield": "The collective emission of cellular biophotons.",
+      "Electricity": "Trans-membrane potential fluctuations in living tissue."
+    },
+    "coordinates": { "x": 200, "y": 600 },
+    "links": ["bio-electric-journey"]
+  },
+  {
+    "id": "heart-energy-torus",
+    "title": "Heart Energy Torus",
+    "tags": ["Biofield", "Torus"],
+    "synthesis": {
+      "Biofield": "The heart's expansive electromagnetic field.",
+      "Torus": "The toroidal geometry of human cardiac energy."
+    },
+    "coordinates": { "x": 500, "y": 200 },
+    "links": ["bio-electric-journey"]
+  },
+  {
     "id": "bio-electric-journey",
     "title": "Bio-Electric Journey",
     "articleId": "intent-to-aura",
-    "tags": ["Biofield", "Neural Intent", "Aura"],
+    "tags": ["Neural Intent", "Biofield", "Aura"],
     "synthesis": {
-      "Biofield": "Mapping the transition from neural intent to bio-electromagnetic manifestation.",
-      "Neural Intent": "The spark of consciousness preceding physical action.",
-      "Aura": "The externalized energy field of the human system."
+      "Neural Intent": "Mapping the path from thought to manifestation.",
+      "Biofield": "The medium of energetic transmission.",
+      "Aura": "The externalized boundary of the human bio-circuitry."
     },
-    "coordinates": { "x": 50, "y": 50 },
-    "links": ["quantum-coherence", "biofield-dynamics"]
-  },
-  {
-    "id": "quantum-coherence",
-    "title": "Quantum Coherence",
-    "tags": ["Quantum", "Coherence"],
-    "synthesis": {
-      "Quantum": "Subatomic synchronization within biological tissues.",
-      "Coherence": "Wave-state alignment of cellular biophotons."
-    },
-    "coordinates": { "x": 30, "y": 30 },
-    "links": ["bio-electric-journey"]
-  },
-  {
-    "id": "biofield-dynamics",
-    "title": "Biofield Dynamics",
-    "tags": ["Dynamics", "Aura"],
-    "synthesis": {
-      "Dynamics": "Fluid motion of electromagnetic gradients.",
-      "Aura": "The radiating boundary of the bio-resonant field."
-    },
-    "coordinates": { "x": 70, "y": 40 },
-    "links": ["bio-electric-journey"]
+    "coordinates": { "x": 500, "y": 450 },
+    "links": ["vibrational-intent", "cellular-bio-electricity", "heart-energy-torus"]
   }
 ]

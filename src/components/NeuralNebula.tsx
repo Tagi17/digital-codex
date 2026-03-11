@@ -43,9 +43,11 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
   const tooltipData = useMemo(() => {
     if (!hoveredNode) return { visible: false, title: '', content: '' };
     
-    const content = hoveredNode.id === 'bio-electric-journey' 
-      ? "A deep-dive into the transition from neural intent to the manifestation of the human biofield."
-      : Object.values(hoveredNode.synthesis)[0] || 'Establishing resonance...';
+    let content = Object.values(hoveredNode.synthesis)[0] || 'Establishing resonance...';
+    
+    if (hoveredNode.id === 'bio-electric-journey') {
+      content = "A deep-dive into the transition from neural intent to the manifestation of the human biofield. [Click to Enter Archive]";
+    }
 
     return {
       visible: true,
@@ -71,8 +73,10 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
 
     const simulationNodes: SimulationNode[] = nodes.map(d => ({ 
       ...d, 
-      x: (d.coordinates.x / 100) * width,
-      y: (d.coordinates.y / 100) * height,
+      x: (d.coordinates.x / 1000) * width,
+      y: (d.coordinates.y / 1000) * height,
+      fx: (d.coordinates.x / 1000) * width, // PIN nodes to fixed coordinates
+      fy: (d.coordinates.y / 1000) * height,
       vx: 0,
       vy: 0
     }));
@@ -89,12 +93,10 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
     });
 
     const simulation = d3.forceSimulation<SimulationNode>(simulationNodes)
-      .force("link", d3.forceLink<SimulationNode, SimulationLink>(links).id(d => d.id).distance(250))
-      .force("charge", d3.forceManyBody().strength(-800))
-      .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collide", d3.forceCollide().radius(80))
-      .force("x", d3.forceX<SimulationNode>(d => (d.coordinates.x / 100) * width).strength(0.05))
-      .force("y", d3.forceY<SimulationNode>(d => (d.coordinates.y / 100) * height).strength(0.05))
+      .force("link", d3.forceLink<SimulationNode, SimulationLink>(links).id(d => d.id).distance(300))
+      .force("charge", d3.forceManyBody().strength(-1500))
+      .force("collide", d3.forceCollide().radius(100))
+      .velocityDecay(0.1) // More fluid movement
       .on("tick", () => {
         setSimNodes([...simulationNodes]);
       });
@@ -104,7 +106,13 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
     const handleResize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      simulation.force("center", d3.forceCenter(w / 2, h / 2));
+      
+      // Update fixed positions on resize if needed
+      simulationNodes.forEach(node => {
+        node.fx = (node.coordinates.x / 1000) * w;
+        node.fy = (node.coordinates.y / 1000) * h;
+      });
+      
       simulation.alpha(0.3).restart();
     };
 
@@ -119,21 +127,25 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
   const draw = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.clearRect(0, 0, width, height);
 
-    // Filter simulation nodes to find links manually for drawing
     nodes.forEach(node => {
       node.links?.forEach(targetId => {
         const sourceNode = simNodes.find(n => n.id === node.id);
         const targetNode = simNodes.find(n => n.id === targetId);
 
         if (sourceNode && targetNode) {
-          const isHighlighted = hoveredNodeId && (node.id === hoveredNodeId || targetId === hoveredNodeId);
+          const isConnectedToHover = hoveredNodeId && (node.id === hoveredNodeId || targetId === hoveredNodeId);
 
           ctx.beginPath();
           ctx.moveTo(sourceNode.x, sourceNode.y);
           ctx.lineTo(targetNode.x, targetNode.y);
 
-          if (isHighlighted) {
-            ctx.strokeStyle = '#D4AF37'; // Auric Gold
+          if (isConnectedToHover) {
+            // Gradient from Cyan to Gold
+            const gradient = ctx.createLinearGradient(sourceNode.x, sourceNode.y, targetNode.x, targetNode.y);
+            gradient.addColorStop(0, '#00F5FF'); // Cyan
+            gradient.addColorStop(1, '#D4AF37'); // Gold
+            
+            ctx.strokeStyle = gradient;
             ctx.lineWidth = 2;
             ctx.globalAlpha = 0.8;
             ctx.shadowBlur = 15;
@@ -141,12 +153,13 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
           } else {
             ctx.strokeStyle = '#00F5FF'; // Bio-Electric Cyan
             ctx.lineWidth = 1;
-            ctx.globalAlpha = 0.15;
+            ctx.globalAlpha = 0.1; // Faint default state
             ctx.shadowBlur = 0;
           }
 
           ctx.stroke();
           ctx.shadowBlur = 0;
+          ctx.globalAlpha = 1.0;
         }
       });
     });
@@ -206,8 +219,8 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
             <Node
               id={node.id}
               title={node.title}
-              x={0} // Positioned via parent transform
-              y={0} // Positioned via parent transform
+              x={0} 
+              y={0} 
               isHovered={hoveredNodeId === node.id}
               isRelated={isRelated(node.id)}
               isSpecial={node.id === 'bio-electric-journey'}
@@ -224,12 +237,12 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       <div className="absolute top-16 left-16 z-30 pointer-events-none">
         <h1 className="text-auric-gold text-3xl tracking-[0.5em] uppercase mb-3">The Luminous Codex</h1>
         <div className="h-[1px] w-32 bg-bio-cyan/40 mb-3" />
-        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.0.7</p>
+        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.0.8</p>
       </div>
 
       <div className="absolute bottom-16 left-16 z-30 pointer-events-none">
         <p className="text-white/30 font-mono text-[10px] uppercase tracking-[0.4em]">
-          Hover nodes to trace filaments. Click highlighted nodes to synthesize data.
+          Hover nodes to trace filaments. Click central nodes to synthesize data.
         </p>
       </div>
 
