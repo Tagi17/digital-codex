@@ -41,17 +41,18 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
 
   // Unified Tooltip State
   const tooltipData = useMemo(() => {
-    if (!hoveredNode) return { visible: false, title: '', content: '' };
+    if (!hoveredNode || hoveredNode.dimmed) return { visible: false, title: '', content: '' };
     
-    let content = Object.values(hoveredNode.synthesis)[0] || 'Establishing resonance...';
-    
-    if (hoveredNode.id === 'bio-electric-journey') {
-      content = "A deep-dive into the transition from neural intent to the manifestation of the human biofield. [Click to Enter Archive]";
+    let content = hoveredNode.description || Object.values(hoveredNode.synthesis)[0] || 'Establishing resonance...';
+    let title = hoveredNode.subtitle ? `${hoveredNode.title} // ${hoveredNode.subtitle}` : hoveredNode.title;
+
+    if (hoveredNode.id === 'cellular-bio-electricity') {
+      content = `${hoveredNode.description} [Click to Synthesize Data]`;
     }
 
     return {
       visible: true,
-      title: hoveredNode.title,
+      title: title,
       content
     };
   }, [hoveredNode]);
@@ -59,7 +60,7 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
   // Handle article opening
   useEffect(() => {
     if (selectedNode && onNodeClick) {
-      if (selectedNode.id === 'bio-electric-journey') {
+      if (selectedNode.id === 'cellular-bio-electricity') {
         onNodeClick(selectedNode);
       }
       setSelectedNodeId(null);
@@ -75,8 +76,8 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       ...d, 
       x: (d.coordinates.x / 1000) * width,
       y: (d.coordinates.y / 1000) * height,
-      fx: (d.coordinates.x / 1000) * width, // PIN nodes to fixed coordinates
-      fy: (d.coordinates.y / 1000) * height,
+      fx: d.dimmed ? undefined : (d.coordinates.x / 1000) * width,
+      fy: d.dimmed ? undefined : (d.coordinates.y / 1000) * height,
       vx: 0,
       vy: 0
     }));
@@ -93,10 +94,11 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
     });
 
     const simulation = d3.forceSimulation<SimulationNode>(simulationNodes)
-      .force("link", d3.forceLink<SimulationNode, SimulationLink>(links).id(d => d.id).distance(300))
-      .force("charge", d3.forceManyBody().strength(-1500))
+      .force("link", d3.forceLink<SimulationNode, SimulationLink>(links).id(d => d.id).distance(200))
+      .force("charge", d3.forceManyBody().strength(-1000))
       .force("collide", d3.forceCollide().radius(100))
-      .velocityDecay(0.1) // More fluid movement
+      .velocityDecay(0.15)
+      .alphaDecay(0.02) // Organic settling
       .on("tick", () => {
         setSimNodes([...simulationNodes]);
       });
@@ -106,13 +108,12 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
     const handleResize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      
-      // Update fixed positions on resize if needed
       simulationNodes.forEach(node => {
-        node.fx = (node.coordinates.x / 1000) * w;
-        node.fy = (node.coordinates.y / 1000) * h;
+        if (!node.dimmed) {
+          node.fx = (node.coordinates.x / 1000) * w;
+          node.fy = (node.coordinates.y / 1000) * h;
+        }
       });
-      
       simulation.alpha(0.3).restart();
     };
 
@@ -126,6 +127,7 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
   // Canvas Drawing Logic
   const draw = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.clearRect(0, 0, width, height);
+    const time = Date.now() / 1000;
 
     nodes.forEach(node => {
       node.links?.forEach(targetId => {
@@ -133,27 +135,35 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
         const targetNode = simNodes.find(n => n.id === targetId);
 
         if (sourceNode && targetNode) {
-          const isConnectedToHover = hoveredNodeId && (node.id === hoveredNodeId || targetId === hoveredNodeId);
+          const isSourceHovered = hoveredNodeId === node.id;
+          const isTargetHovered = hoveredNodeId === targetId;
+          const isCellularActive = hoveredNodeId === 'cellular-bio-electricity' && (node.id === 'cellular-bio-electricity' || targetId === 'cellular-bio-electricity');
 
           ctx.beginPath();
+          // Organic curved links mimicking axonal pathways
+          const midX = (sourceNode.x + targetNode.x) / 2 + (targetNode.y - sourceNode.y) * 0.1;
+          const midY = (sourceNode.y + targetNode.y) / 2 + (sourceNode.x - targetNode.x) * 0.1;
+          
           ctx.moveTo(sourceNode.x, sourceNode.y);
-          ctx.lineTo(targetNode.x, targetNode.y);
+          ctx.quadraticCurveTo(midX, midY, targetNode.x, targetNode.y);
 
-          if (isConnectedToHover) {
-            // Gradient from Cyan to Gold
-            const gradient = ctx.createLinearGradient(sourceNode.x, sourceNode.y, targetNode.x, targetNode.y);
-            gradient.addColorStop(0, '#00F5FF'); // Cyan
-            gradient.addColorStop(1, '#D4AF37'); // Gold
-            
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = 2;
-            ctx.globalAlpha = 0.8;
-            ctx.shadowBlur = 15;
+          if (isCellularActive) {
+            const pulse = 0.4 + Math.sin(time * 4) * 0.3;
+            ctx.strokeStyle = '#00F5FF';
+            ctx.lineWidth = 2.5;
+            ctx.globalAlpha = pulse;
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = '#00F5FF';
+          } else if (isSourceHovered || isTargetHovered) {
+            ctx.strokeStyle = '#D4AF37';
+            ctx.lineWidth = 1.8;
+            ctx.globalAlpha = 0.7;
+            ctx.shadowBlur = 10;
             ctx.shadowColor = '#D4AF37';
           } else {
-            ctx.strokeStyle = '#00F5FF'; // Bio-Electric Cyan
-            ctx.lineWidth = 1;
-            ctx.globalAlpha = 0.1; // Faint default state
+            ctx.strokeStyle = '#00F5FF';
+            ctx.lineWidth = 0.5;
+            ctx.globalAlpha = 0.05; // Faint ghost filament
             ctx.shadowBlur = 0;
           }
 
@@ -223,7 +233,8 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
               y={0} 
               isHovered={hoveredNodeId === node.id}
               isRelated={isRelated(node.id)}
-              isSpecial={node.id === 'bio-electric-journey'}
+              isSpecial={node.id === 'cellular-bio-electricity'}
+              dimmed={node.dimmed}
               onHover={setHoveredNodeId}
               onClick={() => setSelectedNodeId(node.id)}
             />
@@ -237,12 +248,12 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       <div className="absolute top-16 left-16 z-30 pointer-events-none">
         <h1 className="text-auric-gold text-3xl tracking-[0.5em] uppercase mb-3">The Luminous Codex</h1>
         <div className="h-[1px] w-32 bg-bio-cyan/40 mb-3" />
-        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.0.8</p>
+        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.1.0</p>
       </div>
 
       <div className="absolute bottom-16 left-16 z-30 pointer-events-none">
         <p className="text-white/30 font-mono text-[10px] uppercase tracking-[0.4em]">
-          Hover nodes to trace filaments. Click central nodes to synthesize data.
+          Trace axonal pathways. Click "Cellular Bio-Electricity" to expand synthesis.
         </p>
       </div>
 

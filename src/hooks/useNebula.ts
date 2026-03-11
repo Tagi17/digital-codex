@@ -3,6 +3,9 @@ import { useState, useMemo } from 'react';
 export interface NodeData {
   id: string;
   title: string;
+  subtitle?: string;
+  description?: string;
+  dimmed?: boolean;
   articleId?: string;
   tags: string[];
   synthesis: Record<string, string>;

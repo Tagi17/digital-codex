@@ -8,18 +8,22 @@
       "Vibration": "Harmonic oscillations within the synaptic cleft."
     },
     "coordinates": { "x": 800, "y": 600 },
-    "links": ["bio-electric-journey"]
+    "links": ["cellular-bio-electricity"]
   },
   {
     "id": "cellular-bio-electricity",
     "title": "Cellular Bio-Electricity",
-    "tags": ["Biofield", "Electricity"],
+    "subtitle": "Case Study: From Intent to Aura",
+    "description": "An exploration of neural voltage and the bio-electric pathway of stillness.",
+    "articleId": "intent-to-aura",
+    "tags": ["Biofield", "Electricity", "Neural Intent"],
     "synthesis": {
       "Biofield": "The collective emission of cellular biophotons.",
-      "Electricity": "Trans-membrane potential fluctuations in living tissue."
+      "Electricity": "Trans-membrane potential fluctuations in living tissue.",
+      "Neural Intent": "Mapping the path from thought to manifestation."
     },
     "coordinates": { "x": 200, "y": 600 },
-    "links": ["bio-electric-journey"]
+    "links": ["vibrational-intent", "heart-energy-torus", "quantum-relay-alpha"]
   },
   {
     "id": "heart-energy-torus",
@@ -30,19 +34,33 @@
       "Torus": "The toroidal geometry of human cardiac energy."
     },
     "coordinates": { "x": 500, "y": 200 },
-    "links": ["bio-electric-journey"]
+    "links": ["cellular-bio-electricity", "synaptic-web-01"]
   },
   {
-    "id": "bio-electric-journey",
-    "title": "Bio-Electric Journey",
-    "articleId": "intent-to-aura",
-    "tags": ["Neural Intent", "Biofield", "Aura"],
-    "synthesis": {
-      "Neural Intent": "Mapping the path from thought to manifestation.",
-      "Biofield": "The medium of energetic transmission.",
-      "Aura": "The externalized boundary of the human bio-circuitry."
-    },
-    "coordinates": { "x": 500, "y": 450 },
-    "links": ["vibrational-intent", "cellular-bio-electricity", "heart-energy-torus"]
+    "id": "synaptic-web-01",
+    "title": "Synaptic Web Alpha",
+    "dimmed": true,
+    "tags": ["Placeholder"],
+    "synthesis": { "Placeholder": "Archive node awaiting synthesis..." },
+    "coordinates": { "x": 300, "y": 250 },
+    "links": ["heart-energy-torus", "quantum-relay-alpha"]
+  },
+  {
+    "id": "quantum-relay-alpha",
+    "title": "Quantum Relay 07",
+    "dimmed": true,
+    "tags": ["Placeholder"],
+    "synthesis": { "Placeholder": "Archive node awaiting synthesis..." },
+    "coordinates": { "x": 150, "y": 400 },
+    "links": ["cellular-bio-electricity", "synaptic-web-01"]
+  },
+  {
+    "id": "neural-lattice-42",
+    "title": "Neural Lattice 42",
+    "dimmed": true,
+    "tags": ["Placeholder"],
+    "synthesis": { "Placeholder": "Archive node awaiting synthesis..." },
+    "coordinates": { "x": 750, "y": 300 },
+    "links": ["vibrational-intent"]
   }
 ]
