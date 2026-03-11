@@ -3,8 +3,9 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { X, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import journeyData from "@/data/journey_content.json";
+import { NodeData } from "@/hooks/useNebula";
 
 interface Definition {
   title: string;
@@ -36,7 +37,7 @@ const Term: React.FC<TermProps> = ({ id, children, onHover }) => {
 };
 
 interface ArticleViewerProps {
-  nodeData: any; // We can type this more strictly if needed
+  nodeData: NodeData;
   onClose: () => void;
 }
 
