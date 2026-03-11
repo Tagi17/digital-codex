@@ -7,6 +7,7 @@ export interface NodeData {
   tags: string[];
   synthesis: Record<string, string>;
   coordinates: { x: number; y: number };
+  links?: string[];
 }
 
 export const useNebula = (nodes: NodeData[]) => {
