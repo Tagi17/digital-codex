@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { X, ArrowLeft } from "lucide-react";
 import journeyData from "@/data/journey_content.json";
 
 interface Definition {
@@ -34,7 +35,12 @@ const Term: React.FC<TermProps> = ({ id, children, onHover }) => {
   );
 };
 
-const ArticleViewer: React.FC = () => {
+interface ArticleViewerProps {
+  nodeData: any; // We can type this more strictly if needed
+  onClose: () => void;
+}
+
+const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const activeDefinition = useMemo(() => {
@@ -60,19 +66,42 @@ const ArticleViewer: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center p-4 lg:p-8 z-10">
-      {/* Glassmorphism Container */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-7xl h-full max-h-[90vh] glass rounded-2xl overflow-hidden flex border border-auric-gold/20 backdrop-blur-2xl shadow-2xl"
+    <motion.div 
+      initial={{ x: "100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: "100%", opacity: 0 }}
+      transition={{ type: "spring", damping: 25, stiffness: 200 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 lg:p-8 backdrop-blur-xl bg-obsidian/40"
+    >
+      {/* Close Button / Back Arrow */}
+      <button 
+        onClick={onClose}
+        className="absolute top-12 left-12 z-[60] flex items-center gap-4 text-auric-gold/60 hover:text-auric-gold transition-colors group"
       >
+        <div className="w-10 h-10 rounded-full border border-auric-gold/20 flex items-center justify-center group-hover:border-auric-gold/40 bg-obsidian/40 backdrop-blur-md">
+          <ArrowLeft size={18} />
+        </div>
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Return to Nebula</span>
+      </button>
+
+      {/* Glassmorphism Container */}
+      <div className="w-full max-w-7xl h-full max-h-[90vh] glass rounded-2xl overflow-hidden flex border border-auric-gold/20 shadow-2xl relative">
         {/* LEFT: Scrollable Research Text */}
-        <main className="w-[65%] h-full overflow-y-auto custom-scrollbar p-10 lg:p-20 bg-obsidian/40">
+        <main className="w-[65%] h-full overflow-y-auto custom-scrollbar p-10 lg:p-20 bg-obsidian/60">
           <div className="max-w-xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="font-mono text-[10px] text-bio-cyan/60 tracking-[0.4em] uppercase mb-4"
+            >
+              Research Node: {nodeData.id}
+            </motion.div>
+            
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
               className="font-serif text-4xl lg:text-6xl text-auric-gold leading-tight mb-12"
             >
               {journeyData.title}
@@ -84,7 +113,7 @@ const ArticleViewer: React.FC = () => {
                   key={idx}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + idx * 0.1 }}
+                  transition={{ delay: 0.4 + idx * 0.1 }}
                 >
                   {parseContent(item.text)}
                 </motion.p>
@@ -96,7 +125,7 @@ const ArticleViewer: React.FC = () => {
         </main>
 
         {/* RIGHT: Fixed Aura Sidebar */}
-        <aside className="w-[35%] h-full flex flex-col items-center justify-center p-8 bg-black/40 border-l border-auric-gold/10 relative overflow-hidden">
+        <aside className="w-[35%] h-full flex flex-col items-center justify-center p-8 bg-black/60 border-l border-auric-gold/10 relative overflow-hidden">
           <AnimatePresence mode="wait">
             {activeDefinition ? (
               <motion.div
@@ -146,7 +175,7 @@ const ArticleViewer: React.FC = () => {
             )}
           </AnimatePresence>
         </aside>
-      </motion.div>
+      </div>
 
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
@@ -159,7 +188,7 @@ const ArticleViewer: React.FC = () => {
           background: rgba(212, 175, 55, 0.1);
         }
       `}</style>
-    </div>
+    </motion.div>
   );
 };
 

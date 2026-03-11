@@ -4,14 +4,14 @@ import { useEffect, useRef, useMemo, useState } from 'react';
 import { NodeData, useNebula } from '@/hooks/useNebula';
 import { Node } from './ui/Node';
 import { SynthesisTooltip } from './ui/SynthesisTooltip';
-import { ArticleSlate } from './ui/ArticleSlate';
 import { CustomCursor } from './ui/CustomCursor';
 
 interface NeuralNebulaProps {
   nodes: NodeData[];
+  onNodeClick?: (node: NodeData) => void;
 }
 
-export const NeuralNebula = ({ nodes }: NeuralNebulaProps) => {
+export const NeuralNebula = ({ nodes, onNodeClick }: NeuralNebulaProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
     hoveredNodeId,
@@ -23,6 +23,15 @@ export const NeuralNebula = ({ nodes }: NeuralNebulaProps) => {
     isRelated,
     getSharedTags
   } = useNebula(nodes);
+
+  // Trigger parent callback when node is selected
+  useEffect(() => {
+    if (selectedNode && onNodeClick) {
+      onNodeClick(selectedNode);
+      // Reset local selection so it can be re-triggered if needed
+      setSelectedNodeId(null);
+    }
+  }, [selectedNode, onNodeClick, setSelectedNodeId]);
 
   const [tooltip, setTooltip] = useState<{ content: string; x: number; y: number; visible: boolean }>({
     content: '',
@@ -152,12 +161,6 @@ export const NeuralNebula = ({ nodes }: NeuralNebulaProps) => {
 
       {/* Tooltip */}
       <SynthesisTooltip {...tooltip} />
-
-      {/* Article Overlay */}
-      <ArticleSlate
-        node={selectedNode}
-        onClose={() => setSelectedNodeId(null)}
-      />
 
       {/* HUD / Branding */}
       <div className="absolute top-16 left-16 z-30 pointer-events-none">
