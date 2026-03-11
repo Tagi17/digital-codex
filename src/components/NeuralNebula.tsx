@@ -87,7 +87,7 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       node.links?.forEach(targetId => {
         const source = simulationNodes.find(n => n.id === node.id);
         const target = simulationNodes.find(n => n.id === targetId);
-        if (source && target) {
+        if (source && target && source.id !== target.id) {
           links.push({ source, target });
         }
       });
@@ -127,13 +127,14 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
   // Canvas Drawing Logic
   const draw = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.clearRect(0, 0, width, height);
+    ctx.setLineDash([]); // Ensure solid lines
 
     nodes.forEach(node => {
       node.links?.forEach(targetId => {
-        // Render Guard: Verify source and target nodes exist in the nodes array
-        const sourceNodeExists = nodes.some(n => n.id === node.id);
-        const targetNodeExists = nodes.some(n => n.id === targetId);
-        if (!sourceNodeExists || !targetNodeExists) return;
+        // Render Guard: Verify source and target nodes exist and are not the same node
+        const s = nodes.find(n => n.id === node.id);
+        const t = nodes.find(n => n.id === targetId);
+        if (!s || !t || s.id === t.id) return;
 
         const sourceNode = simNodes.find(n => n.id === node.id);
         const targetNode = simNodes.find(n => n.id === targetId);
@@ -142,15 +143,13 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
           const isConnectedToHover = hoveredNodeId && (node.id === hoveredNodeId || targetId === hoveredNodeId);
 
           ctx.beginPath();
-          const midX = (sourceNode.x + targetNode.x) / 2 + (targetNode.y - sourceNode.y) * 0.1;
-          const midY = (sourceNode.y + targetNode.y) / 2 + (sourceNode.x - targetNode.x) * 0.1;
-          
+          // Straight line implementation
           ctx.moveTo(sourceNode.x, sourceNode.y);
-          ctx.quadraticCurveTo(midX, midY, targetNode.x, targetNode.y);
+          ctx.lineTo(targetNode.x, targetNode.y);
 
           if (isConnectedToHover) {
             ctx.strokeStyle = '#D4AF37'; // Gold
-            ctx.lineWidth = 1.8;
+            ctx.lineWidth = 1.5;
             ctx.globalAlpha = 0.8;
             ctx.shadowBlur = 10;
             ctx.shadowColor = '#D4AF37';
@@ -242,7 +241,7 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       <div className="absolute top-16 left-16 z-30 pointer-events-none">
         <h1 className="text-auric-gold text-3xl tracking-[0.5em] uppercase mb-3">The Luminous Codex</h1>
         <div className="h-[1px] w-32 bg-bio-cyan/40 mb-3" />
-        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.1.1</p>
+        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.1.2</p>
       </div>
 
       <div className="absolute bottom-16 left-16 z-30 pointer-events-none">

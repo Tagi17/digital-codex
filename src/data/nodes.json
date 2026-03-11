@@ -8,7 +8,7 @@
       "Vibration": "Harmonic oscillations within the synaptic cleft."
     },
     "coordinates": { "x": 800, "y": 600 },
-    "links": ["cellular-bio-electricity", "heart-energy-torus"]
+    "links": ["cellular-bio-electricity"]
   },
   {
     "id": "cellular-bio-electricity",
@@ -23,7 +23,7 @@
       "Neural Intent": "Mapping the path from thought to manifestation."
     },
     "coordinates": { "x": 200, "y": 600 },
-    "links": ["vibrational-intent", "heart-energy-torus", "quantum-relay-alpha"]
+    "links": ["heart-energy-torus"]
   },
   {
     "id": "heart-energy-torus",
@@ -34,33 +34,6 @@
       "Torus": "The toroidal geometry of human cardiac energy."
     },
     "coordinates": { "x": 500, "y": 200 },
-    "links": ["cellular-bio-electricity", "vibrational-intent", "synaptic-web-01"]
-  },
-  {
-    "id": "synaptic-web-01",
-    "title": "Synaptic Web Alpha",
-    "dimmed": true,
-    "tags": ["Placeholder"],
-    "synthesis": { "Placeholder": "Archive node awaiting synthesis..." },
-    "coordinates": { "x": 300, "y": 250 },
-    "links": ["heart-energy-torus", "quantum-relay-alpha"]
-  },
-  {
-    "id": "quantum-relay-alpha",
-    "title": "Quantum Relay 07",
-    "dimmed": true,
-    "tags": ["Placeholder"],
-    "synthesis": { "Placeholder": "Archive node awaiting synthesis..." },
-    "coordinates": { "x": 150, "y": 400 },
-    "links": ["cellular-bio-electricity", "synaptic-web-01"]
-  },
-  {
-    "id": "neural-lattice-42",
-    "title": "Neural Lattice 42",
-    "dimmed": true,
-    "tags": ["Placeholder"],
-    "synthesis": { "Placeholder": "Archive node awaiting synthesis..." },
-    "coordinates": { "x": 750, "y": 300 },
     "links": ["vibrational-intent"]
   }
 ]
