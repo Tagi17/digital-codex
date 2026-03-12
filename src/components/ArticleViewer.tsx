@@ -46,17 +46,27 @@ interface ArticleViewerProps {
 const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, contentId }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  // Use contentId or nodeData.articleId as fallback
   const targetId = contentId || nodeData.articleId;
   const article = targetId ? (articlesData as any)[targetId] : null;
 
-  // Manage body scroll and cursor
+  // Global Cursor Override & UI Bug Fix
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
     
+    // Force global cursor to auto
+    document.body.style.cursor = 'auto';
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(el => {
+      (el as HTMLElement).style.cursor = 'auto';
+    });
+
     return () => {
       document.body.style.overflow = originalStyle;
+      document.body.style.cursor = '';
+      allElements.forEach(el => {
+        (el as HTMLElement).style.cursor = '';
+      });
     };
   }, []);
 
@@ -90,16 +100,16 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: "100%", opacity: 0 }}
       transition={{ type: "spring", damping: 25, stiffness: 200 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 lg:p-8 backdrop-blur-xl bg-obsidian/40 pointer-events-auto"
-      style={{ cursor: 'auto' }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:p-8 backdrop-blur-xl bg-obsidian/40 pointer-events-auto article-active"
+      style={{ pointerEvents: 'all' }}
     >
-      {/* Close Button / Back Arrow - Enhanced Clickability */}
+      {/* Close Button / Back Arrow */}
       <button 
         onClick={(e) => {
           e.stopPropagation();
           onClose();
         }}
-        className="absolute top-12 left-12 z-[100] flex items-center gap-4 text-auric-gold/60 hover:text-auric-gold transition-colors group cursor-pointer pointer-events-auto"
+        className="absolute top-12 left-12 z-[110] flex items-center gap-4 text-auric-gold/60 hover:text-auric-gold transition-colors group cursor-pointer hover:cursor-pointer pointer-events-auto"
       >
         <div className="w-10 h-10 rounded-full border border-auric-gold/20 flex items-center justify-center group-hover:border-auric-gold/40 bg-obsidian/60 backdrop-blur-md">
           <ArrowLeft size={18} />
@@ -109,7 +119,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
 
       {/* Glassmorphism Container */}
       <div className="w-full max-w-7xl h-full max-h-[90vh] glass rounded-2xl overflow-hidden flex border border-auric-gold/20 shadow-2xl relative pointer-events-auto">
-        {/* LEFT: Scrollable Research Text */}
         <main className="w-[65%] h-full overflow-y-auto custom-scrollbar p-10 lg:p-20 bg-obsidian/60">
           <div className="max-w-xl mx-auto">
             <motion.div
@@ -147,7 +156,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
           </div>
         </main>
 
-        {/* RIGHT: Fixed Aura Sidebar */}
         <aside className="w-[35%] h-full flex flex-col items-center justify-center p-8 bg-black/60 border-l border-auric-gold/10 relative overflow-hidden">
           <AnimatePresence mode="wait">
             {activeDefinition ? (
@@ -201,6 +209,15 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       </div>
 
       <style jsx global>{`
+        .article-active {
+          cursor: auto !important;
+        }
+        .article-active * {
+          cursor: auto !important;
+        }
+        .article-active canvas {
+          pointer-events: none !important;
+        }
         .custom-scrollbar::-webkit-scrollbar {
           width: 2px;
         }

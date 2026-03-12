@@ -10,14 +10,16 @@ import { NodeData } from "@/hooks/useNebula";
 export default function Home() {
   const [selectedNode, setSelectedNode] = useState<NodeData | null>(null);
 
+  const isModalOpen = !!selectedNode;
+
   return (
-    <main className="relative min-h-screen bg-obsidian overflow-hidden">
+    <main className={`relative min-h-screen bg-obsidian overflow-hidden ${isModalOpen ? 'article-active' : ''}`}>
       {/* Background Layer: Neural Nebula */}
       <div className="absolute inset-0 z-0">
         <NeuralNebula 
           nodes={nodesData as unknown as NodeData[]} 
           onNodeClick={(node) => setSelectedNode(node)}
-          isOverlayActive={!!selectedNode}
+          isOverlayActive={isModalOpen}
         />
       </div>
 
