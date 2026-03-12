@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import journeyData from "@/data/journey_content.json";
+import articlesData from "@/data/articles.json";
 import { NodeData } from "@/hooks/useNebula";
 
 interface Definition {
@@ -39,10 +40,25 @@ const Term: React.FC<TermProps> = ({ id, children, onHover }) => {
 interface ArticleViewerProps {
   nodeData: NodeData;
   onClose: () => void;
+  contentId?: string;
 }
 
-const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose }) => {
+const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, contentId }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
+
+  // Use contentId or nodeData.articleId as fallback
+  const targetId = contentId || nodeData.articleId;
+  const article = targetId ? (articlesData as any)[targetId] : null;
+
+  // Manage body scroll and cursor
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = "hidden";
+    
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
 
   const activeDefinition = useMemo(() => {
     if (!activeId) return null;
@@ -66,27 +82,33 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose }) => {
     });
   };
 
+  if (!article) return null;
+
   return (
     <motion.div 
       initial={{ x: "100%", opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: "100%", opacity: 0 }}
       transition={{ type: "spring", damping: 25, stiffness: 200 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 lg:p-8 backdrop-blur-xl bg-obsidian/40"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 lg:p-8 backdrop-blur-xl bg-obsidian/40 pointer-events-auto"
+      style={{ cursor: 'auto' }}
     >
-      {/* Close Button / Back Arrow */}
+      {/* Close Button / Back Arrow - Enhanced Clickability */}
       <button 
-        onClick={onClose}
-        className="absolute top-12 left-12 z-[60] flex items-center gap-4 text-auric-gold/60 hover:text-auric-gold transition-colors group"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        className="absolute top-12 left-12 z-[100] flex items-center gap-4 text-auric-gold/60 hover:text-auric-gold transition-colors group cursor-pointer pointer-events-auto"
       >
-        <div className="w-10 h-10 rounded-full border border-auric-gold/20 flex items-center justify-center group-hover:border-auric-gold/40 bg-obsidian/40 backdrop-blur-md">
+        <div className="w-10 h-10 rounded-full border border-auric-gold/20 flex items-center justify-center group-hover:border-auric-gold/40 bg-obsidian/60 backdrop-blur-md">
           <ArrowLeft size={18} />
         </div>
         <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Return to Nebula</span>
       </button>
 
       {/* Glassmorphism Container */}
-      <div className="w-full max-w-7xl h-full max-h-[90vh] glass rounded-2xl overflow-hidden flex border border-auric-gold/20 shadow-2xl relative">
+      <div className="w-full max-w-7xl h-full max-h-[90vh] glass rounded-2xl overflow-hidden flex border border-auric-gold/20 shadow-2xl relative pointer-events-auto">
         {/* LEFT: Scrollable Research Text */}
         <main className="w-[65%] h-full overflow-y-auto custom-scrollbar p-10 lg:p-20 bg-obsidian/60">
           <div className="max-w-xl mx-auto">
@@ -96,7 +118,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose }) => {
               transition={{ delay: 0.2 }}
               className="font-mono text-[10px] text-bio-cyan/60 tracking-[0.4em] uppercase mb-4"
             >
-              Research Node: {nodeData.id}
+              Archive Entry // {nodeData.title}
             </motion.div>
             
             <motion.h1 
@@ -105,11 +127,11 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose }) => {
               transition={{ delay: 0.3 }}
               className="font-serif text-4xl lg:text-6xl text-auric-gold leading-tight mb-12"
             >
-              {journeyData.title}
+              {article.title}
             </motion.h1>
 
             <div className="space-y-8 font-serif text-lg lg:text-xl leading-relaxed text-white/90">
-              {journeyData.content.map((item, idx) => (
+              {article.content.map((item: any, idx: number) => (
                 <motion.p 
                   key={idx}
                   initial={{ opacity: 0, y: 10 }}
