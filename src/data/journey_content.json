@@ -70,5 +70,29 @@
     "concept": "The Physics of the Aura.",
     "mechanism": "The rhythmic flipping of trillions of ions (current) generates an oscillating electromagnetic field surrounding the tissue.",
     "biological_function": "Explains how the biological process of ion oscillation manifests as a measurable Bio-field or Aura."
+  },
+{
+  "id": "polarization",
+  "title": "Cellular Polarization",
+  "definition": "The process of maintaining a distinct charge separation across a biological membrane.",
+  "concept": "The Loaded Spring.",
+  "mechanism": "By actively segregating ions—keeping Sodium (Na⁺) outside and Potassium (K⁺) inside—the cell creates an electrical tension between two poles.",
+  "biological_function": "Establishes the 'Resting Potential' required for a neuron to fire an Action Potential on command."
+},
+{
+    "id": "depolarization",
+    "title": "Depolarization",
+    "definition": "A sudden change within a cell during which the cell undergoes a dramatic shift in electric charge distribution.",
+    "concept": "The Spark of Action.",
+    "mechanism": "Voltage-gated Sodium channels pop open, allowing a rush of positive Na⁺ ions into the negative interior, flipping the charge from -70mV toward +30mV.",
+    "biological_function": "This is the actual 'firing' of the thought—the moment the electrical signal is committed to the journey."
+  },
+  {
+    "id": "repolarization",
+    "title": "Repolarization",
+    "definition": "The stage of an action potential in which the cell's membrane potential is restored to its negative resting state.",
+    "concept": "The System Reset.",
+    "mechanism": "Sodium channels close and Potassium (K⁺) channels open, allowing positive ions to exit the cell, dropping the internal voltage back down to its negative baseline.",
+    "biological_function": "Prevents the neuron from staying 'stuck' in a firing state, allowing the system to clear and prepare for the next focused intent."
   }
 ]

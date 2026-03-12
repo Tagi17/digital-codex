@@ -2,7 +2,7 @@
   "intent-to-aura": {
     "title": "From Intent to Aura: The Bio-Electric Journey",
     "author": "The Luminous Archive Research Team",
-    "date": "October 26, 2026",
+    "date": "March 11, 2026",
     "content": [
       {
         "type": "paragraph",
@@ -22,16 +22,20 @@
         "caption": "Figure 1: Anatomy of a Neuron — The Biological Battery."
       },
       {
+        "type": "paragraph",
+        "text": "Inherently, neurons are Polarized. This is the \"Negative-Positive Game.\" The inside of the cell is naturally Negative (-70 mV), meaning it is 70 millivolts more negatively charged than the outside due to the high concentration of Potassium (K⁺), while the outer surface is Positive due to Sodium (Na⁺). Sodium desperately wants to get into the cell, building electrical pressure—an electrical gradient—across the cell membrane. The neuron acts as a loaded spring, ready to fire once given the command. Your body uses ATP (cellular energy) to maintain this \"battery charge\" by using the <Term id='sodium-potassium-pump'>Sodium-Potassium Pump</Term> to move Potassium in and keep Sodium out."
+      },
+      {
         "type": "heading",
         "text": "[THE SENDER NEURON: PREFRONTAL CORTEX]"
       },
       {
         "type": "dash-list",
         "items": [
-          "Reaching Threshold: Neurons build up electrical pressure until they reach their <Term id='threshold-potential'>Threshold Potential</Term> (-55mV).",
-          "The Sodium Wave: Once hit, it triggers an <Term id='action-potential'>Action Potential</Term>. A wave of Sodium (Na+) rushes into the neuron, traveling down the Axon.",
-          "The Calcium Trigger: When the wave hits the tip, the internal voltage flips (Depolarization), opening <Term id='calcium-channels'>Voltage-Gated Calcium Channels</Term>.",
-          "The Release: Calcium rushes in and binds to <Term id='snare-proteins'>SNARE proteins</Term>, releasing <Term id='glutamate'>Glutamate</Term> into the Synapse."
+          "**Reaching Threshold:** The Sender neuron builds up electrical pressure until they reach their <Term id='threshold-potential'>Threshold Potential</Term> (-55mV).",
+          "T**he Sodium Wave:** Once the treshold is hit, it triggers an <Term id='action-potential'>Action Potential</Term>. A wave of Sodium (Na+) rushes into the neuron, and this wave of positivity travels down the Axon towards the terminal tip.",
+          "**The Calcium Trigger:** When the Sodium wave hits the tip, the internal voltage flips from negative to positive, a <Term id='depolarization'>Depolarization<Term id='depolarization'> effect. This positivity, electrostatically repels the positive sensors inside the <Term id='calcium-channels'>Voltage-Gated Calcium Channels</Term>, pushing them open.",
+          "**The Release:** Calcium rushes in from the outside and acts as a physical activator binding to <Term id='snare-proteins'>SNARE proteins</Term>, Glutamate is a highly reactive neurotransmitter, therefore is contained within tiny bubble in the synaptic vesicles, Cakciusm grabs the bubbles - Synaptic vesicles and releases <Term id='glutamate'>Glutamate</Term> into the Synapse."
         ]
       },
       {
@@ -41,9 +45,9 @@
       {
         "type": "dash-list",
         "items": [
-          "The Cholinergic Plug: Intent triggers the <Term id='cholinergic-system'>Cholinergic System</Term> to spray <Term id='acetylcholine'>ACh</Term> onto the receiver, 'plugging' the Potassium leaks to ensure the signal is heard.",
-          "The Chemical Key: Glutamate binds to <Term id='ampa-receptors'>AMPA receptors</Term>, allowing a rush of Sodium to flood the dendrite.",
-          "The Struggle: The thought becomes an <Term id='epsp'>EPSP</Term>, fighting through internal structures to reach the Soma and trigger a physical command."
+          "**The Cholinergic Plug:** Intent triggers the <Term id='cholinergic-system'>Cholinergic System</Term> to spray <Term id='acetylcholine'>ACh</Term> onto the receiver, 'plugging' the Potassium leaks to ensure the signal is heard.",
+          "**The Chemical Key:** Glutamate binds to <Term id='ampa-receptors'>AMPA receptors</Term>, allowing a rush of Sodium to flood the dendrite.",
+          "**The Struggle:** The thought becomes an <Term id='epsp'>EPSP</Term>, fighting through internal structures to reach the Soma and trigger a physical command."
         ]
       },
       {
