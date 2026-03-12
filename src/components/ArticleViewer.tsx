@@ -8,6 +8,7 @@ import journeyData from "@/data/journey_content.json";
 import articlesData from "@/data/articles.json";
 import { NodeData } from "@/hooks/useNebula";
 
+// 1. INTERFACE UPDATE
 interface Definition {
   id: string;
   title: string;
@@ -54,10 +55,10 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
   const targetId = contentId || nodeData.articleId;
   const article = targetId ? (articlesData as any)[targetId] : null;
 
-  // 1. DATA LOOKUP REPAIR & SAFETY GUARD
+  // 2. LOGIC CORRECTION (Brute Force Fix for Vercel)
   const activeDefinition = useMemo(() => {
     if (!activeTermId || !Array.isArray(journeyData)) return null;
-    return (journeyData as Definition[]).find(item => item.id === activeTermId) || null;
+    return (journeyData as Definition[]).find((item: Definition) => item.id === activeTermId) || null;
   }, [activeTermId]);
 
   const headings = useMemo(() => {
@@ -222,7 +223,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     }
   };
 
-  // RENDER GUARD
   if (!article || !article.content || !Array.isArray(journeyData)) return null;
 
   return (
@@ -233,7 +233,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       className="fixed inset-0 z-[100] bg-obsidian/98 backdrop-blur-3xl flex selection:bg-auric-gold/20 pointer-events-auto"
       style={{ pointerEvents: 'all' }}
     >
-      {/* LEFT SIDEBAR: NAVIGATION INDEX */}
       <aside className="w-[240px] h-full border-r-[0.5px] border-auric-gold/20 flex flex-col p-8 pt-24 shrink-0 bg-black/20">
         <button 
           onClick={onClose}
@@ -267,7 +266,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         </nav>
       </aside>
 
-      {/* CENTER PANE: THE RESEARCH */}
       <main className="flex-1 h-full relative flex flex-col items-center overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-auric-gold/10 overflow-hidden">
           <motion.div 
@@ -309,7 +307,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         </div>
       </main>
 
-      {/* RIGHT SIDEBAR: THE AURA SYNC PANE */}
       <aside className="w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/50 shrink-0 p-12 flex flex-col relative">
         <div className="h-full flex flex-col justify-center">
           <AnimatePresence mode="wait">
