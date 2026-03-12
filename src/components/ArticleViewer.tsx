@@ -28,15 +28,14 @@ interface TermProps {
 const Term: React.FC<TermProps> = ({ id, children, onHover }) => {
   return (
     <span
-      className="cursor-help transition-all duration-300 relative group inline-block hover:cursor-pointer"
+      className="cursor-help transition-all duration-300 relative group inline-block hover:cursor-pointer border-b border-bio-cyan/30 hover:bg-bio-cyan/10 px-1 rounded-sm"
       onMouseEnter={() => onHover(id)}
       onMouseLeave={() => onHover(null)}
     >
-      <span className="text-auric-gold relative z-10 font-medium italic">
+      <span className="text-bio-cyan group-hover:text-white relative z-10 font-medium italic transition-colors duration-300">
         {children}
       </span>
-      <span className="absolute inset-0 bg-auric-gold/10 blur-sm scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
-      <span className="absolute bottom-0 left-0 w-full h-[1px] bg-auric-gold/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+      <span className="absolute inset-0 bg-bio-cyan/5 blur-sm scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
     </span>
   );
 };
@@ -169,7 +168,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
           <h3 
             key={index} 
             id={`heading-${index}`}
-            className={`font-mono text-xl text-bio-cyan/90 uppercase tracking-[0.3em] mt-16 border-b border-auric-gold/10 pb-4 scroll-mt-24 ${commonClass}`}
+            className={`font-mono text-xl text-auric-gold/90 uppercase tracking-[0.3em] mt-16 border-b border-auric-gold/10 pb-4 scroll-mt-24 ${commonClass}`}
           >
             {block.text}
           </h3>
@@ -364,23 +363,23 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                   </div>
                   <div>
                     <h4 className="font-mono text-[10px] text-bio-cyan/60 tracking-[0.4em] uppercase mb-3">Neural Sync Active</h4>
-                    <h3 className="font-serif text-3xl text-auric-gold tracking-tight">{activeDefinition.title}</h3>
+                    <h3 className="font-serif text-3xl text-bio-cyan tracking-tight">{activeDefinition.title}</h3>
                   </div>
                 </div>
 
                 <div className="space-y-10">
-                  <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
-                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ CONCEPT ]</h5>
+                  <div className="border-l-[0.5px] border-bio-cyan/30 pl-8">
+                    <h5 className="font-mono text-[10px] text-bio-cyan tracking-[0.3em] uppercase mb-4 opacity-60">[ CONCEPT ]</h5>
                     <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.concept}</p>
                   </div>
 
-                  <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
-                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ MECHANISM ]</h5>
+                  <div className="border-l-[0.5px] border-bio-cyan/30 pl-8">
+                    <h5 className="font-mono text-[10px] text-bio-cyan tracking-[0.3em] uppercase mb-4 opacity-60">[ MECHANISM ]</h5>
                     <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.mechanism}</p>
                   </div>
 
-                  <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
-                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ BIOLOGICAL FUNCTION ]</h5>
+                  <div className="border-l-[0.5px] border-bio-cyan/30 pl-8">
+                    <h5 className="font-mono text-[10px] text-bio-cyan tracking-[0.3em] uppercase mb-4 opacity-60">[ BIOLOGICAL FUNCTION ]</h5>
                     <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.biological_function}</p>
                   </div>
                 </div>
@@ -399,7 +398,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.2 }}
                 exit={{ opacity: 0 }}
-                className="text-center font-mono text-[11px] uppercase tracking-[0.6em] text-auric-gold leading-loose border-[0.5px] border-auric-gold/10 p-16 bg-black/20"
+                className="text-center font-mono text-[11px] uppercase tracking-[0.6em] text-bio-cyan leading-loose border-[0.5px] border-bio-cyan/10 p-16 bg-black/20"
               >
                 [ SYNC IDLE ]<br />
                 <span className="text-[10px] tracking-[0.3em] opacity-50 mt-4 block">Synchronizing archive via neural hover state...</span>
