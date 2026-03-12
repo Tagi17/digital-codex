@@ -168,10 +168,12 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         );
       case 'dash-list':
         return (
-          <ul key={index} className={`list-none space-y-4 ml-4 ${commonClass}`}>
+          <ul key={index} className="list-none mb-8 block selection:bg-auric-gold/30">
             {block.items.map((item: string, i: number) => (
-              <li key={i} className="font-serif text-lg text-white/70 flex gap-4">
-                <span className="text-auric-gold/50 font-mono text-sm mt-1">—</span>
+              <li 
+                key={i} 
+                className="font-serif text-xl text-white/80 relative pl-10 mb-6 leading-relaxed before:content-['—'] before:absolute before:left-0 before:text-auric-gold"
+              >
                 {parseText(item)}
               </li>
             ))}
