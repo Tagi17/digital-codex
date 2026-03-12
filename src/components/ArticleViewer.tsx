@@ -55,7 +55,41 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
   const targetId = contentId || nodeData.articleId;
   const article = targetId ? (articlesData as any)[targetId] : null;
 
-  // 2. LOGIC CORRECTION (Brute Force Fix for Vercel)
+  // 1. THE HELPER FUNCTION (Modified for React Safety)
+  // Note: We use React nodes instead of dangerouslySetInnerHTML to preserve 
+  // the Term component's hover state logic and state updates.
+  const renderFormattedText = (text: string) => {
+    if (!text) return "";
+    
+    // Split by both Term tags and Markdown bold markers
+    const parts = text.split(/(<Term id='.*?'>.*?<\/Term>|\*\*.*?\*\*)/g);
+    
+    return parts.map((part, index) => {
+      // Handle <Term> tags
+      const termMatch = part.match(/<Term id='(.*?)'>(.*?)<\/Term>/);
+      if (termMatch) {
+        return (
+          <Term key={index} id={termMatch[1]} onHover={setActiveTermId}>
+            {termMatch[2]}
+          </Term>
+        );
+      }
+      
+      // Handle **bold** text
+      const boldMatch = part.match(/\*\*(.*?)\*\*/);
+      if (boldMatch) {
+        return (
+          <span key={index} className="text-auric-gold font-bold tracking-wide">
+            {boldMatch[1]}
+          </span>
+        );
+      }
+      
+      return part;
+    });
+  };
+
+  // LOGIC CORRECTION
   const activeDefinition = useMemo(() => {
     if (!activeTermId || !Array.isArray(journeyData)) return null;
     return (journeyData as Definition[]).find((item: Definition) => item.id === activeTermId) || null;
@@ -129,23 +163,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     }
   };
 
-  const parseText = (text: string) => {
-    const parts = text.split(/(<Term id='.*?'>.*?<\/Term>)/g);
-    return parts.map((part, index) => {
-      const match = part.match(/<Term id='(.*?)'>(.*?)<\/Term>/);
-      if (match) {
-        const id = match[1];
-        const content = match[2];
-        return (
-          <Term key={index} id={id} onHover={setActiveTermId}>
-            {content}
-          </Term>
-        );
-      }
-      return part;
-    });
-  };
-
   const renderBlock = (block: any, index: number) => {
     const commonClass = "mb-8 selection:bg-auric-gold/30";
     
@@ -153,7 +170,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       case 'paragraph':
         return (
           <p key={index} className={`font-serif text-xl leading-[1.8] text-white/80 ${commonClass}`}>
-            {parseText(block.text)}
+            {renderFormattedText(block.text)}
           </p>
         );
       case 'heading':
@@ -187,7 +204,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                 key={i} 
                 className="font-serif text-xl text-white/80 relative pl-10 mb-6 leading-relaxed before:content-['—'] before:absolute before:left-0 before:text-auric-gold"
               >
-                {parseText(item)}
+                {renderFormattedText(item)}
               </li>
             ))}
           </ul>
@@ -226,9 +243,9 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
               </div>
               <div>
                 <h4 className="font-mono text-[11px] text-auric-gold uppercase tracking-[0.4em] mb-4">Deep Dive: {block.label}</h4>
-                <p className="font-serif text-xl text-white/70 leading-relaxed italic mb-4">
-                  {block.text}
-                </p>
+                <div className="font-serif text-xl text-white/70 leading-relaxed italic mb-4">
+                  {renderFormattedText(block.text)}
+                </div>
               </div>
             </div>
           </div>
