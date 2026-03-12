@@ -82,8 +82,44 @@
         "text": "[THE PNS RELAY: THE HIGHWAY]"
       },
       {
+        "type": "heading",
+        "text": "[PHASE 3: THE HIGHWAY — THE PNS RELAY]"
+      },
+      {
         "type": "paragraph",
-        "text": "The signal enters the <Term id='pns'>Peripheral Nervous System</Term>, a high-speed relay network connecting the brain to the tissues. To ensure forward motion, the nerve uses an <Term id='inactivation-gate'>Inactivation Gate (H-gate)</Term>, creating a 'dead zone' that prevents the signal from bouncing backward."
+        "text": "Once the receiver neuron hits the threshold, it fires its own <Term id='action-potential'>Action Potential</Term>. This is a self-generating explosion of energy that ensures the signal from the brain can reach your hand without losing momentum—or \"juice.\""
+      },
+      {
+        "type": "heading-small",
+        "text": "THE WAVE: THE PNS COMMUNICATION NETWORK"
+      },
+      {
+        "type": "paragraph",
+        "text": "The somatosensory cortex connects to the <Term id='pns'>Peripheral Nervous System (PNS)</Term>, a vast network of nerves connecting your brain and spinal cord to the rest of your body. The PNS acts as a high-speed relay system designed to facilitate near-instantaneous communication—sending sensory reports back to the brain and motor commands to the tissues."
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "heading-small",
+        "text": "THE ONE-WAY GATE: ENSURING FORWARD MOTION"
+      },
+      {
+        "type": "paragraph",
+        "text": "To ensure the thought always moves towards your hand and never bounces backward towards your brain, the nerve utilizes a \"trapdoor\" mechanism. This ensures the intent remains a focused, linear command rather than an electrical echo."
+      },
+      
+      {
+        "type": "dash-list",
+        "items": [
+          "**The H-gate:** As the Sodium wave moves forward, the Sodium channels behind it immediately lock shut using an <Term id='inactivation-gate'>Inactivation Gate (H-gate)</Term>.",
+          "**The Absolute Refractory Period:** This creates a temporary \"dead zone\" where the nerve cannot fire again for a split second. This forced pause ensures the signal is a one-way command, maintaining the direction of your intent."
+        ]
+      },
+      {
+        "type": "deep-dive",
+        "label": "THE BALL-AND-CHAIN MECHANISM",
+        "text": "The H-gate physically blocks the channel like a tethered ball. This mechanical blockage is what prevents your thoughts from 'back-firing' and ensures your biological energy is directed exactly where your focus is placed."
       },
       {
         "type": "heading",
