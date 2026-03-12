@@ -152,7 +152,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     switch (block.type) {
       case 'paragraph':
         return (
-          <p key={index} className={`font-serif text-xl leading-relaxed text-white/80 ${commonClass}`}>
+          <p key={index} className={`font-serif text-xl leading-[1.8] text-white/80 ${commonClass}`}>
             {parseText(block.text)}
           </p>
         );
@@ -165,6 +165,19 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
           >
             {block.text}
           </h3>
+        );
+      case 'heading-small':
+        return (
+          <h4 
+            key={index}
+            className="text-auric-gold/90 font-mono text-sm tracking-[0.2em] uppercase mb-4 mt-8"
+          >
+            {block.text}
+          </h4>
+        );
+      case 'divider':
+        return (
+          <hr key={index} className="border-t border-bio-cyan/10 my-10 w-1/4 mx-auto" />
         );
       case 'dash-list':
         return (
