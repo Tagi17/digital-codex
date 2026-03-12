@@ -238,5 +238,53 @@
     "concept": "The Metabolic Switch.",
     "mechanism": "Once ACh binds, these receptors trigger internal signaling cascades (like releasing calcium from the ER).",
     "biological_function": "Regulates 'slow' biological responses like vessel relaxation and heart rate adjustment."
+  },
+  {
+    "id": "atp",
+    "title": "ATP (Adenosine Triphosphate)",
+    "definition": "The primary energy currency of the cell.",
+    "concept": "The Cellular Battery.",
+    "mechanism": "Stores energy in high-energy phosphate bonds; when a bond is broken, it releases the power needed for pumps and enzymes to work.",
+    "biological_function": "Fueling the 'reset' of neurons and the physical work of vasodilation."
+  },
+  {
+    "id": "calmodulin",
+    "title": "Calmodulin",
+    "definition": "A calcium-binding messenger protein found in all eukaryotic cells.",
+    "concept": "The Master Sensor.",
+    "mechanism": "Once it binds to four Calcium ions, it changes its shape to 'hug' and activate other enzymes like eNOS.",
+    "biological_function": "Translates the presence of Calcium into a signal for the cell to start producing gas."
+  },
+  {
+    "id": "enos",
+    "title": "eNOS (Endothelial Nitric Oxide Synthase)",
+    "definition": "An enzyme located in the lining of blood vessels.",
+    "concept": "The Gas Generator.",
+    "mechanism": "Takes L-arginine and Oxygen and chemically converts them into Nitric Oxide gas when activated by Calmodulin.",
+    "biological_function": "The key catalyst for increasing blood flow and creating the 'aura' effect."
+  },
+  {
+    "id": "caveolin",
+    "title": "Caveolin-1",
+    "definition": "A scaffolding protein that keeps certain enzymes in an 'off' state.",
+    "concept": "The Safety Lock.",
+    "mechanism": "Physically binds to eNOS to prevent it from producing gas until the Calcium-Calmodulin complex pulls it away.",
+    "biological_function": "Prevents the body from wasting energy or dilating blood vessels when no signal is present."
+  },
+  {
+    "id": "cgmp",
+    "title": "cGMP (Cyclic Guanosine Monophosphate)",
+    "definition": "A 'second messenger' molecule that carries signals inside the smooth muscle cells.",
+    "concept": "The Relaxation Memo.",
+    "mechanism": "Produced when Nitric Oxide enters the muscle cell, it triggers the removal of calcium from the muscle fibers, causing them to relax.",
+    "biological_function": "The final internal signal that forces a blood vessel to widen (dilate)."
+  },
+  {
+    "id": "nitric-oxide",
+    "title": "Nitric Oxide (NO)",
+    "definition": "A short-lived, highly reactive gas molecule that acts as a signaling agent.",
+    "concept": "The Invisible Messenger.",
+    "mechanism": "Easily diffuses through cell membranes to tell nearby muscles to stop contracting.",
+    "biological_function": "The direct cause of vasodilation and the increase in local metabolic activity."
   }
 ]
