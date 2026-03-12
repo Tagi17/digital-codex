@@ -14,7 +14,7 @@
       },
       {
         "type": "paragraph",
-        "text": "To understand the journey, we must look at the <Term id='neuron'>Neuron</Term>- the fundamental unit of the nervous system that transmits information throughout the body and brain via electrical and chemical signals. A neuron is composed of <Term id='dendrite'>Dendrites</Term>- branches that receive neurons, a <Term id='soma'>Soma</Term>- the cell body, an <Term id='axon'>Axon</Term>- the long wire for transmitting impulses, and <Term id='synaptic-vesicles'>Synaptic Vesicles</Term>- small membrane bound sacs located in the Axon terminal, which store, transport, and release neurotransmitters into the synapse, the communication space between neurons." 
+        "text": "To understand the journey, we must look at the <Term id='neuron'>Neuron</Term>- the fundamental unit of the nervous system that transmits information throughout the body and brain via electrical and chemical signals. A neuron is composed of <Term id='dendrite'>Dendrites</Term>- branches that receive neurons, a <Term id='soma'>Soma</Term>- the cell body, an <Term id='axon'>Axon</Term>- the long wire for transmitting impulses, and <Term id='synaptic-vesicle'>Synaptic Vesicles</Term>- small membrane bound sacs located in the Axon terminal, which store, transport, and release neurotransmitters into the synapse, the communication space between neurons." 
       },
       {
         "type": "image",
@@ -34,7 +34,7 @@
         "items": [
           "**Reaching Threshold:** The Sender neuron builds up electrical pressure until they reach their <Term id='threshold-potential'>Threshold Potential</Term> (-55mV).",
           "T**he Sodium Wave:** Once the treshold is hit, it triggers an <Term id='action-potential'>Action Potential</Term>. A wave of Sodium (Na+) rushes into the neuron, and this wave of positivity travels down the Axon towards the terminal tip.",
-          "**The Calcium Trigger:** When the Sodium wave hits the tip, the internal voltage flips from negative to positive, a <Term id='depolarization'>Depolarization</Term> effect. This positivity, electrostatically repels the positive sensors inside the <Term id='calcium-channels'>Voltage-Gated Calcium Channels</Term>, pushing them open.",
+          "**The Calcium Trigger:** When the Sodium wave hits the tip, the internal voltage flips from negative to positive, a <Term id='depolarization'>Depolarization</Term> effect. This positivity, electrostatically repels the positive sensors inside the <Term id='vgcc'>Voltage-Gated Calcium Channels</Term>, pushing them open.",
           "**The Release:** Calcium rushes in from the outside and acts as a physical activator binding to <Term id='snare-proteins'>SNARE proteins</Term>, Glutamate is a highly reactive neurotransmitter, therefore is contained within tiny bubble in the synaptic vesicles, Calcium grabs the bubbles - Synaptic vesicles and releases <Term id='glutamate'>Glutamate</Term> into the Synapse."
         ]
       },
@@ -48,7 +48,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Your focused intent triggers the <Term id='cholinergic-system'>Cholinergic System</Term> to spray <Term id='acetylcholine'>ACh</Term> onto the receiver’s dendrites. Normally, dendrites are considered \"porous pipes\" that leak Potassium (K⁺) to filter out the background noise. Your brain distinguishes what to filter out based on the priority of the signal; by constantly leaking Potassium, the brain effectively \"silences\" the millions of weak informational inputs your body generates every second. This ensures that only a signal strong enough to pass the voltage threshold acts as a \"shout,\" which is then automatically taken to be processed further. ACh acts as the physical plug for these holes, turning the whisper of your intent into the necessary shout by preventing the electricity from escaping."
+            "text": "Your focused intent triggers the <Term id='cholinergic-system'>Cholinergic System</Term> to spray <Term id='ach'>ACh</Term> onto the receiver’s dendrites. Normally, dendrites are considered \"porous pipes\" that leak Potassium (K⁺) to filter out the background noise. Your brain distinguishes what to filter out based on the priority of the signal; by constantly leaking Potassium, the brain effectively \"silences\" the millions of weak informational inputs your body generates every second. This ensures that only a signal strong enough to pass the voltage threshold acts as a \"shout,\" which is then automatically taken to be processed further. ACh acts as the physical plug for these holes, turning the whisper of your intent into the necessary shout by preventing the electricity from escaping."
           },
           {
             "type": "divider"
@@ -59,7 +59,7 @@
           },
           {
             "type": "paragraph",
-            "text": "The <Term id='glutamate'>Glutamate</Term> from the Sender neuron binds to the Ligand-Gated Sodium channels (specifically the <Term id='ampa-receptors'>AMPA receptors</Term>) on the Receivers’ dendrite. The chemical binding acts like a key turning a lock, causing the Sodium channels to open, allowing a rush of positive Sodium to flood the dendrite."
+            "text": "The <Term id='glutamate'>Glutamate</Term> from the Sender neuron binds to the Ligand-Gated Sodium channels (specifically the <Term id='ampa-receptor'>AMPA receptors</Term>) on the Receivers’ dendrite. The chemical binding acts like a key turning a lock, causing the Sodium channels to open, allowing a rush of positive Sodium to flood the dendrite."
           },
           {
             "type": "divider"
@@ -140,8 +140,8 @@
       {
         "type": "dash-list",
         "items": [
-          "**The Final Calcium Surge:** Just like in the brain, the incoming Sodium wave makes the nerve terminal positive, popping open the <Term id='calcium-channels'>Voltage-Gated Calcium Channels</Term>.",
-          "**The Local ACh Release:** Calcium enters and binds to <Term id='synaptotagmin'>Synaptotagmin</Term>, which activates the <Term id='snare-proteins'>SNARE proteins</Term>. These vesicles pop open and dump <Term id='acetylcholine'>ACh</Term> locally onto the nearby blood vessel walls.",
+          "**The Final Calcium Surge:** Just like in the brain, the incoming Sodium wave makes the nerve terminal positive, popping open the <Term id='vgcc'>Voltage-Gated Calcium Channels</Term>.",
+          "**The Local ACh Release:** Calcium enters and binds to <Term id='synaptotagmin'>Synaptotagmin</Term>, which activates the <Term id='snare-proteins'>SNARE proteins</Term>. These vesicles pop open and dump <Term id='ach'>ACh</Term> locally onto the nearby blood vessel walls.",
           "**The Vessel Command:** ACh clicks into the <Term id='muscarinic-receptors'>Muscarinic Receptors</Term> on the vessel wall, triggering the <Term id='endoplasmic-reticulum'>Endoplasmic Reticulum</Term> (internal storage) to dump even more Calcium into the cell fluid."
         ]
       },
