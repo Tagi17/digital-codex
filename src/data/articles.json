@@ -158,12 +158,38 @@
         "text": "[THE METABOLIC EXPLOSION: VASODILATION]"
       },
       {
+        "type": "paragraph",
+        "text": "The internal Calcium in your hand now acts as a high-velocity reactive trigger. This is the transition from a 'command' to a 'physical expansion.' Your intent is no longer just electricity; it is now a gaseous chemical signal."
+      },
+      
+      {
+        "type": "heading-small",
+        "text": "THE CHEMICAL CASCADE: THE eNOS MACHINE"
+      },
+      {
         "type": "dash-list",
         "items": [
-          "The eNOS Machine: Calcium binds to <Term id='calmodulin'>Calmodulin</Term>, yanking the safety lock off the <Term id='enos'>eNOS</Term> enzyme.",
-          "Nitric Oxide: The eNOS enzyme converts L-arginine into <Term id='nitric-oxide'>Nitric Oxide (NO)</Term> gas.",
-          "The Fuel Surge: NO triggers <Term id='vasodilation'>Vasodilation</Term>, allowing a rush of blood, glucose, and oxygen to reach the <Term id='mitochondria'>Mitochondria</Term>."
+          "**The eNOS Machine:** Calcium binds to <Term id='calmodulin'>Calmodulin</Term>, forming a complex that yanks the safety lock (<Term id='caveolin'>Caveolin-1</Term>) off the <Term id='enos'>eNOS</Term> enzyme.",
+          "**Nitric Oxide Synthesis:** The activated eNOS enzyme pulls L-arginine and Oxygen from your blood, converting them into <Term id='nitric-oxide'>Nitric Oxide (NO)</Term> gas.",
+          "**The Vessel Relaxation:** NO gas diffuses into the smooth muscle of the blood vessels, triggering the creation of <Term id='cgmp'>cGMP</Term>. This molecule tells the muscle fibers to 'let go' and stop contracting."
         ]
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "heading-small",
+        "text": "THE RESULT: THE SURGE OF HEAT"
+      },
+      {
+        "type": "paragraph",
+        "text": "This is **Vasodilation**—the widening of the blood vessels. This surge allows an massive increase in blood flow, carrying the Glucose and Oxygen necessary for your <Term id='mitochondria'>Mitochondria</Term> to generate <Term id='atp'>ATP</Term>. This sudden rush of warm, oxygenated blood is the physical heat you feel in your hand when you focus your intent."
+      },
+      
+      {
+        "type": "deep-dive",
+        "label": "ION OSCILLATION & THE FIELD",
+        "text": "As your Mitochondria work at 100% capacity to reset the Sodium-Potassium pumps, trillions of ions begin to flip back and forth in a synchronized rhythm. According to the Ampère–Maxwell Law, this rapid oscillation of charge generates the coherent electromagnetic field known as your Bio-field or Aura."
       },
       {
         "type": "deep-dive",
