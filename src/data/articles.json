@@ -14,7 +14,7 @@
       },
       {
         "type": "paragraph",
-        "text": "To understand the journey, we must look at the <Term id='neuron'>Neuron</Term>, the fundamental unit of the nervous system that transmits information throughout the body and brain via electrical and chemical signals. A neuron is composed of <Term id='dendrite'>Dendrites</Term>, branches that receive neurons, a <Term id='soma'>Soma</Term>, the cell body, an <Term id='axon'>Axon</Term>, the long wire for transmitting impulses, and <Term id='synaptic-vesicles'>Synaptic Vesicles</Term>, small membrane bound sacs located in the Axon terminal, which store, transport, and release neurotransmitters into the synapse, the communication space between neurons." 
+        "text": "To understand the journey, we must look at the <Term id='neuron'>Neuron</Term>- the fundamental unit of the nervous system that transmits information throughout the body and brain via electrical and chemical signals. A neuron is composed of <Term id='dendrite'>Dendrites</Term>- branches that receive neurons, a <Term id='soma'>Soma</Term>- the cell body, an <Term id='axon'>Axon</Term>- the long wire for transmitting impulses, and <Term id='synaptic-vesicles'>Synaptic Vesicles</Term>- small membrane bound sacs located in the Axon terminal, which store, transport, and release neurotransmitters into the synapse, the communication space between neurons." 
       },
       {
         "type": "image",
@@ -23,7 +23,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Inherently, neurons are Polarized. This is the \"Negative-Positive Game.\" The inside of the cell is naturally Negative (-70 mV), meaning it is 70 millivolts more negatively charged than the outside due to the high concentration of Potassium (K⁺), while the outer surface is Positive due to Sodium (Na⁺). Sodium desperately wants to get into the cell, building electrical pressure—an electrical gradient—across the cell membrane. The neuron acts as a loaded spring, ready to fire once given the command. Your body uses ATP (cellular energy) to maintain this \"battery charge\" by using the <Term id='sodium-potassium-pump'>Sodium-Potassium Pump</Term> to move Potassium in and keep Sodium out."
+        "text": "Inherently, neurons are Polarized. This is the \"Negative-Positive Game.\" The inside of the cell is naturally Negative (-70 mV), meaning it is 70 millivolts more negatively charged than the outside due to the high concentration of Potassium (K⁺), while the outer surface is Positive due to Sodium (Na⁺). Sodium desperately wants to get into the cell, building electrical pressure- an<Term id='electrical-gradient'>electrical gradient</Term> across the cell membrane. The neuron acts as a loaded spring, ready to fire once given the command. Your body uses ATP (cellular energy) to maintain this \"battery charge\" by using the <Term id='sodium-potassium-pump'>Sodium-Potassium Pump</Term> to move Potassium in and keep Sodium out."
       },
       {
         "type": "heading",

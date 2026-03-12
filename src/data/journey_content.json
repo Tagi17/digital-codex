@@ -102,5 +102,13 @@
   "concept": "The Cellular Reservoir.",
   "mechanism": "When triggered by ACh, the ER opens its gates, flooding the cell with Calcium to activate metabolic enzymes like eNOS.",
   "biological_function": "Acts as an amplifier, turning a small chemical signal into a massive metabolic shift."
+},
+{
+  "id": "electrical-gradient",
+  "title": "Electrical Gradient",
+  "definition": "The difference in electrical charge between the inside and the outside of a neuron's membrane.",
+  "concept": "The Loaded Spring.",
+  "mechanism": "By keeping a high concentration of positive Sodium (Na+) outside and a negative charge inside (-70mV), the cell creates an 'electrical pull' that forces ions to rush in the moment a channel opens.",
+  "biological_function": "Provides the stored potential energy necessary to trigger an instantaneous Action Potential (the spark) without needing to generate energy from scratch every time."
 }
 ]
