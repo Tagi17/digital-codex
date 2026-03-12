@@ -110,5 +110,133 @@
   "concept": "The Loaded Spring.",
   "mechanism": "By keeping a high concentration of positive Sodium (Na+) outside and a negative charge inside (-70mV), the cell creates an 'electrical pull' that forces ions to rush in the moment a channel opens.",
   "biological_function": "Provides the stored potential energy necessary to trigger an instantaneous Action Potential (the spark) without needing to generate energy from scratch every time."
-}
+},
+{
+    "id": "neuron",
+    "title": "Neuron",
+    "definition": "The specialized cell of the nervous system designed to transmit information.",
+    "concept": "The Biological Circuit.",
+    "mechanism": "Uses a combination of internal electrical pulses and external chemical messengers to bridge long distances in the body.",
+    "biological_function": "The primary building block of thought, sensation, and movement."
+  },
+  {
+    "id": "dendrite",
+    "title": "Dendrite",
+    "definition": "The branch-like extensions of a neuron that receive incoming signals.",
+    "concept": "The Antennae.",
+    "mechanism": "Covered in receptors that catch neurotransmitters from neighboring cells, converting chemical keys into electrical nudges.",
+    "biological_function": "The 'Input' stage where the neuron listens to the surrounding environment."
+  },
+  {
+    "id": "soma",
+    "title": "Soma (Cell Body)",
+    "definition": "The central hub of the neuron containing the nucleus and organelles.",
+    "concept": "The Decision Center.",
+    "mechanism": "Sums up all the incoming electrical 'whispers' (EPSPs) from the dendrites to see if they are strong enough to reach the threshold.",
+    "biological_function": "Maintains the cell's life and acts as the gatekeeper for signal transmission."
+  },
+  {
+    "id": "axon",
+    "title": "Axon",
+    "definition": "A long, slender projection that conducts electrical impulses away from the cell body.",
+    "concept": "The Transmission Wire.",
+    "mechanism": "Propagates the action potential over long distances via a wave of opening and closing ion channels.",
+    "biological_function": "The 'Output' cable that carries the command from the brain to the target tissue."
+  },
+  {
+    "id": "synaptic-vesicle",
+    "title": "Synaptic Vesicle",
+    "definition": "Small, membrane-bound bubbles located in the axon terminal.",
+    "concept": "The Cargo Crates.",
+    "mechanism": "Store neurotransmitters and dock at the cell membrane to release their contents into the synapse when triggered by calcium.",
+    "biological_function": "Protects reactive chemicals like Glutamate until the exact moment they are needed for signaling."
+  },
+  {
+    "id": "threshold-potential",
+    "title": "Threshold Potential",
+    "definition": "The specific voltage level (-55mV) required to trigger an action potential.",
+    "concept": "The Point of No Return.",
+    "mechanism": "When the cell's internal charge rises to this level, it causes voltage-gated sodium channels to pop open simultaneously.",
+    "biological_function": "Acts as a filter to prevent random 'noise' or weak thoughts from accidentally triggering a physical response."
+  },
+  {
+    "id": "cholinergic-system",
+    "title": "Cholinergic System",
+    "definition": "The network of neurons and pathways that primarily use Acetylcholine (ACh) to communicate.",
+    "concept": "The Focus Engine.",
+    "mechanism": "Modulates the 'leakiness' of neurons to sharpen signals and improve the signal-to-noise ratio.",
+    "biological_function": "Essential for attention, learning, and directing focused intent to specific body parts."
+  },
+  {
+    "id": "ampa-receptor",
+    "title": "AMPA Receptor",
+    "definition": "A specific type of receptor on the dendrite that responds to Glutamate.",
+    "concept": "The Sodium Doorway.",
+    "mechanism": "When Glutamate binds, the receptor changes shape to let positive Sodium (Na+) rush into the cell.",
+    "biological_function": "Responsible for the fast, initial 'spark' of a signal in the receiving neuron."
+  },
+  {
+    "id": "glutamate",
+    "title": "Glutamate",
+    "definition": "The most abundant excitatory neurotransmitter in the vertebrate nervous system.",
+    "concept": "The Universal 'Go' Signal.",
+    "mechanism": "Binds to receptors on the postsynaptic neuron to increase its internal positivity.",
+    "biological_function": "The primary chemical used to relay 'active' information across the gap between neurons."
+  },
+  {
+    "id": "epsp",
+    "title": "Excitatory Postsynaptic Potential (EPSP)",
+    "definition": "A temporary increase in the neuron's internal voltage that brings it closer to the threshold.",
+    "concept": "The Electrical Whisper.",
+    "mechanism": "Created by the localized influx of positive ions through receptors like AMPA.",
+    "biological_function": "A sub-threshold signal that must be combined with others to successfully 'fire' the neuron."
+  },
+  {
+    "id": "action-potential",
+    "title": "Action Potential",
+    "definition": "A rapid, self-propagating electrical impulse that travels along the axon.",
+    "concept": "The Bio-Electric Wave.",
+    "mechanism": "A chain reaction of sodium rushing in and potassium rushing out, creating a spike of energy.",
+    "biological_function": "The fundamental unit of communication that allows the brain to send 'real-time' commands to the hand."
+  },
+  {
+    "id": "pns",
+    "title": "Peripheral Nervous System (PNS)",
+    "definition": "The network of nerves outside the brain and spinal cord.",
+    "concept": "The Information Highway.",
+    "mechanism": "Relays sensory data up to the brain and motor commands down to the muscles and organs.",
+    "biological_function": "Connects the 'Command Center' (Brain) to the 'Hardware' (Body)."
+  },
+  {
+    "id": "vgcc",
+    "title": "Voltage-Gated Calcium Channels",
+    "definition": "Protein tunnels in the cell membrane that open specifically in response to a change in voltage.",
+    "concept": "The Positive Pressure Gates.",
+    "mechanism": "When the action potential hits the terminal, these gates detect the positivity and open to let Calcium (Ca2+) flood in.",
+    "biological_function": "Translates an electrical signal into a chemical action (the release of neurotransmitters)."
+  },
+  {
+    "id": "ach",
+    "title": "Acetylcholine (ACh)",
+    "definition": "A versatile neurotransmitter used in both the brain and the body's peripheral tissues.",
+    "concept": "The Chemical Bridge.",
+    "mechanism": "In the hand, it bridges the gap between the nerve terminal and the blood vessel or muscle tissue.",
+    "biological_function": "Directly triggers the physical changes like vasodilation (blood flow) or muscle contraction."
+  },
+  {
+    "id": "synaptotagmin",
+    "title": "Synaptotagmin",
+    "definition": "A protein found on the surface of synaptic vesicles that acts as a calcium sensor.",
+    "concept": "The Molecular Trigger.",
+    "mechanism": "When calcium levels rise, it grabs the calcium ions and instantly signals the SNARE proteins to fuse the vesicle to the membrane.",
+    "biological_function": "Ensures the chemical 'message' is released at the exact microsecond the electrical spark arrives."
+  },
+  {
+    "id": "muscarinic-receptors",
+    "title": "Muscarinic Receptors",
+    "definition": "A class of G-protein coupled receptors that respond to Acetylcholine.",
+    "concept": "The Metabolic Switch.",
+    "mechanism": "Once ACh binds, these receptors trigger internal signaling cascades (like releasing calcium from the ER).",
+    "biological_function": "Regulates 'slow' biological responses like vessel relaxation and heart rate adjustment."
+  }
 ]
