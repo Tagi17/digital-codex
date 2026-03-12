@@ -29,7 +29,7 @@ const Term: React.FC<TermProps> = ({ id, children, onHover }) => {
       onMouseEnter={() => onHover(id)}
       onMouseLeave={() => onHover(null)}
     >
-      <span className="text-auric-gold relative z-10 font-medium">
+      <span className="text-auric-gold relative z-10 font-medium italic">
         {children}
       </span>
       <span className="absolute inset-0 bg-auric-gold/10 blur-sm scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
@@ -61,21 +61,21 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     restDelta: 0.001
   });
 
-  // Permanent Cursor Restore & Global Styles
+  // 1. PERMANENT CURSOR RESTORE (Brute Force)
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
     
-    // Brute Force Cursor Injection
+    // Inject a global style tag to force cursor visibility
     const style = document.createElement('style');
-    style.id = 'article-viewer-cursor-fix';
+    style.id = 'article-cursor-fix';
     style.innerHTML = `* { cursor: auto !important; }`;
     document.head.appendChild(style);
     
     return () => {
       document.body.style.overflow = originalStyle;
-      const fix = document.getElementById('article-viewer-cursor-fix');
-      if (fix) fix.remove();
+      const styleTag = document.getElementById('article-cursor-fix');
+      if (styleTag) styleTag.remove();
     };
   }, []);
 
@@ -109,12 +109,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
             {parseText(block.text)}
           </p>
         );
-      case 'heading':
-        return (
-          <h3 key={index} className="font-mono text-xl text-bio-cyan/90 uppercase tracking-[0.3em] mt-16 mb-8 border-b border-auric-gold/10 pb-4">
-            {block.text}
-          </h3>
-        );
       case 'bullet-list':
         return (
           <ul key={index} className="list-none space-y-4 mb-8 ml-4">
@@ -128,18 +122,18 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         );
       case 'image':
         return (
-          <figure key={index} className="mb-8 group">
-            <div className="relative aspect-video w-full overflow-hidden rounded border border-auric-gold/20 bg-black/40">
+          <figure key={index} className="mb-8 w-full group">
+            <div className="relative aspect-video w-full overflow-hidden border border-auric-gold/10 bg-black/40">
               <Image 
                 src={block.url} 
                 alt={block.caption || ""} 
                 fill 
-                className="object-cover opacity-60 group-hover:opacity-80 transition-opacity"
+                className="object-cover opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
               />
             </div>
             {block.caption && (
-              <figcaption className="mt-3 font-mono text-[10px] text-bio-cyan/50 uppercase tracking-[0.2em] italic">
-                Fig.{index + 1}: {block.caption}
+              <figcaption className="mt-3 font-mono text-[10px] text-bio-cyan/60 uppercase tracking-[0.3em] italic">
+                {block.caption}
               </figcaption>
             )}
           </figure>
@@ -156,27 +150,29 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-2xl flex selection:bg-auric-gold/20 pointer-events-auto"
+      className="fixed inset-0 z-[100] bg-obsidian/98 backdrop-blur-3xl flex selection:bg-auric-gold/20 pointer-events-auto"
       style={{ pointerEvents: 'all' }}
     >
-      {/* 1. LEFT SIDEBAR: THE INDEX (200px) */}
+      {/* 2. UI ALIGNMENT (The 3-Pane Codex) */}
+
+      {/* LEFT SIDEBAR: NAVIGATION INDEX (220px) */}
       <aside className="w-[220px] h-full border-r-[0.5px] border-auric-gold/20 flex flex-col p-8 pt-24 shrink-0 bg-black/20">
         <button 
           onClick={onClose}
-          className="font-mono text-[11px] text-auric-gold hover:text-white transition-all tracking-[0.2em] mb-20 flex items-center gap-3 group cursor-pointer border border-auric-gold/20 p-3 bg-black/40 backdrop-blur-sm"
+          className="font-mono text-[11px] text-auric-gold hover:text-white transition-all tracking-[0.2em] mb-20 flex items-center gap-3 group cursor-pointer border-[0.5px] border-auric-gold/30 p-4 bg-black/40 backdrop-blur-md"
         >
-          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           [ BACK TO NEBULA ]
         </button>
 
-        <nav className="space-y-10">
-          <div className="text-[10px] font-mono text-bio-cyan/40 tracking-[0.4em] uppercase mb-6 border-b border-bio-cyan/10 pb-2">Archive Index</div>
+        <nav className="space-y-10 overflow-y-auto custom-scrollbar pr-4">
+          <div className="text-[10px] font-mono text-bio-cyan/40 tracking-[0.4em] uppercase mb-6 border-b border-bio-cyan/20 pb-2">Research Index</div>
           {article.sections.map((section: any) => (
             <div key={section.id} className="group cursor-pointer">
-              <div className="font-mono text-[11px] text-auric-gold/40 group-hover:text-auric-gold transition-colors mb-1">
+              <div className="font-mono text-[11px] text-auric-gold group-hover:text-auric-gold/60 transition-colors mb-1">
                 [{section.id}]
               </div>
-              <div className="font-mono text-[11px] text-white/40 group-hover:text-white/90 transition-colors uppercase tracking-[0.2em] leading-tight">
+              <div className="font-mono text-[11px] text-white/40 group-hover:text-white transition-colors uppercase tracking-[0.2em] leading-snug">
                 {section.title}
               </div>
             </div>
@@ -184,10 +180,10 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         </nav>
       </aside>
 
-      {/* 2. CENTER PANE: THE RESEARCH */}
-      <main className="flex-1 h-full relative flex flex-col items-center">
-        {/* Progress Line on the divider */}
-        <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-auric-gold/10 overflow-hidden">
+      {/* CENTER PANE: THE RESEARCH (SCROLLABLE) */}
+      <main className="flex-1 h-full relative flex flex-col items-center overflow-hidden">
+        {/* Progress Line */}
+        <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-auric-gold/10 overflow-hidden">
           <motion.div 
             className="w-full h-full bg-auric-gold origin-top shadow-[0_0_10px_#D4AF37]"
             style={{ scaleY }}
@@ -196,57 +192,60 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
 
         <div 
           ref={scrollContainerRef}
-          className="w-full h-full overflow-y-auto custom-scrollbar px-12 lg:px-24 py-24 scroll-smooth"
+          className="w-full h-full overflow-y-auto custom-scrollbar px-16 lg:px-32 py-24 scroll-smooth"
         >
           <div className="max-w-2xl mx-auto">
-            <header className="mb-24">
-              <div className="font-mono text-[11px] text-bio-cyan/60 tracking-[0.6em] uppercase mb-6 flex items-center gap-4">
-                <span className="w-8 h-[1px] bg-bio-cyan/30" />
+            <header className="mb-24 relative">
+              <div className="font-mono text-[11px] text-bio-cyan/50 tracking-[0.6em] uppercase mb-6 flex items-center gap-4">
+                <span className="w-10 h-[1px] bg-bio-cyan/20" />
                 NEURAL RESEARCH CODEX
               </div>
-              <h1 className="font-serif text-5xl lg:text-7xl text-auric-gold leading-[1.1] mb-10 tracking-tight">
+              <h1 className="font-serif text-5xl lg:text-7xl text-auric-gold leading-[1.05] mb-12 tracking-tight">
                 {article.title}
               </h1>
-              <div className="flex items-center gap-6 font-mono text-[10px] text-white/30 tracking-[0.3em] uppercase border-y border-auric-gold/10 py-4">
-                <span>AUTH: LUMINOUS ARCHIVE</span>
-                <span className="w-1 h-1 bg-auric-gold/40 rounded-full" />
-                <span>CYCLE: 0x4F92</span>
-                <span className="w-1 h-1 bg-auric-gold/40 rounded-full" />
-                <span>ID: {targetId}</span>
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-4 font-mono text-[10px] text-white/30 tracking-[0.3em] uppercase border-y border-auric-gold/10 py-6">
+                <span className="flex items-center gap-2">AUTH: <span className="text-white/60">LUMINOUS ARCHIVE</span></span>
+                <span className="flex items-center gap-2">CYCLE: <span className="text-white/60">0x4F92</span></span>
+                <span className="flex items-center gap-2">ID: <span className="text-white/60">{targetId}</span></span>
               </div>
             </header>
 
-            {article.sections.map((section: any) => (
-              <section key={section.id} className="mb-20">
-                <div className="flex items-center gap-4 mb-10">
-                  <span className="font-mono text-xs text-auric-gold tracking-widest">[{section.id}]</span>
-                  <div className="h-[0.5px] flex-1 bg-auric-gold/20" />
-                </div>
-                {section.blocks.map((block: any, idx: number) => renderBlock(block, idx))}
-              </section>
-            ))}
+            <article className="relative">
+              {article.sections.map((section: any) => (
+                <section key={section.id} className="mb-24">
+                  <div className="flex items-center gap-6 mb-12">
+                    <span className="font-mono text-xs text-auric-gold tracking-[0.4em]">[{section.id}]</span>
+                    <div className="h-[0.5px] flex-1 bg-auric-gold/10" />
+                  </div>
+                  {section.blocks.map((block: any, idx: number) => renderBlock(block, idx))}
+                </section>
+              ))}
 
-            {/* DEEP DIVE BOX */}
-            <div className="mt-32 p-10 border-[0.5px] border-auric-gold/40 bg-auric-gold/[0.03] backdrop-blur-sm relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-1 h-full bg-auric-gold/40" />
-              <div className="flex items-start gap-6 relative z-10">
-                <div className="p-3 border border-auric-gold/30 bg-black/40 text-auric-gold">
-                  <Settings size={24} className="group-hover:rotate-90 transition-transform duration-700" />
-                </div>
-                <div>
-                  <h4 className="font-mono text-xs text-auric-gold uppercase tracking-[0.3em] mb-4">Deep Dive: Synthesis Mechanism</h4>
-                  <p className="font-serif text-lg text-white/60 leading-relaxed italic mb-6">
-                    "The manifestation of the biofield is not a passive emission, but an active synthesis of neural intent mediated by mitochondrial electrical gradients."
-                  </p>
-                  <div className="font-mono text-[9px] text-bio-cyan/40 uppercase tracking-[0.2em]">
-                    Referenced: Bio-Electric Signal Stabilization (v1.0.4)
+              {/* 4. THE 'DEEP DIVE' BOX */}
+              <div className="mt-32 p-10 border border-auric-gold/30 bg-auric-gold/[0.02] backdrop-blur-sm relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-[2px] h-full bg-auric-gold/50" />
+                <div className="flex items-start gap-8 relative z-10">
+                  <div className="p-4 border border-auric-gold/20 bg-black/60 text-auric-gold">
+                    <Settings size={28} className="group-hover:rotate-180 transition-transform duration-1000 ease-in-out" />
+                  </div>
+                  <div>
+                    <h4 className="font-mono text-[11px] text-auric-gold uppercase tracking-[0.4em] mb-4">Deep Dive: Synthesis Mechanism</h4>
+                    <p className="font-serif text-xl text-white/70 leading-relaxed italic mb-8">
+                      "The manifestation of the biofield is not a passive emission, but an active synthesis of neural intent mediated by mitochondrial electrical gradients and quantum-coherent signaling."
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-1.5 h-1.5 bg-bio-cyan rounded-full animate-pulse" />
+                      <div className="font-mono text-[9px] text-bio-cyan/50 uppercase tracking-[0.2em]">
+                        Referenced: Bio-Electric Signal Stabilization (v1.0.4)
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
             
-            <footer className="mt-48 pb-24 text-center">
-              <div className="font-mono text-[10px] text-white/10 tracking-[0.5em] uppercase border-t border-white/5 pt-12">
+            <footer className="mt-48 pb-32 border-t border-auric-gold/10 text-center">
+              <div className="font-mono text-[10px] text-white/10 tracking-[0.6em] uppercase pt-12">
                 SIGNAL ARCHIVE // END OF TRANSCRIPTION
               </div>
             </footer>
@@ -254,20 +253,20 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         </div>
       </main>
 
-      {/* 3. RIGHT SIDEBAR: THE SYNC (320px) */}
-      <aside className="w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/40 shrink-0 p-12 flex flex-col">
+      {/* 3. RIGHT SIDEBAR: THE AURA SYNC PANE (350px) */}
+      <aside className="w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/50 shrink-0 p-12 flex flex-col relative">
         <div className="h-full flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {activeDefinition ? (
               <motion.div
                 key={activeTermId}
-                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                initial={{ opacity: 0, y: 30, filter: "blur(15px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                exit={{ opacity: 0, y: -30, filter: "blur(15px)" }}
                 className="space-y-12"
               >
-                <div className="flex items-center gap-6 mb-12">
-                  <div className="w-20 h-20 border border-bio-cyan/30 bg-black/60 p-5 relative overflow-hidden">
+                <div className="flex flex-col gap-6 mb-16">
+                  <div className="w-20 h-20 border border-bio-cyan/20 bg-black/40 p-5 relative overflow-hidden self-start">
                     <div className="absolute inset-0 bg-bio-cyan/5 animate-pulse" />
                     <Image 
                       src={activeDefinition.image} 
@@ -278,34 +277,34 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                     />
                   </div>
                   <div>
-                    <h4 className="font-mono text-[10px] text-bio-cyan tracking-[0.4em] uppercase mb-2">Aura Sync Active</h4>
+                    <h4 className="font-mono text-[10px] text-bio-cyan/60 tracking-[0.4em] uppercase mb-3">Neural Sync Active</h4>
                     <h3 className="font-serif text-3xl text-auric-gold tracking-tight">{activeDefinition.title}</h3>
                   </div>
                 </div>
 
-                <div className="space-y-8">
-                  <div className="border-l border-auric-gold/20 pl-6">
-                    <h5 className="font-mono text-[10px] text-auric-gold/60 tracking-[0.2em] uppercase mb-3">[ DEFINITION ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/80 uppercase tracking-wide">{activeDefinition.concept}</p>
+                <div className="space-y-10">
+                  <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
+                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ DEFINITION ]</h5>
+                    <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.concept}</p>
                   </div>
 
-                  <div className="border-l border-auric-gold/20 pl-6">
-                    <h5 className="font-mono text-[10px] text-auric-gold/60 tracking-[0.2em] uppercase mb-3">[ MECHANISM ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/80 uppercase tracking-wide">{activeDefinition.mechanism}</p>
+                  <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
+                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ MECHANISM ]</h5>
+                    <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.mechanism}</p>
                   </div>
 
-                  <div className="border-l border-auric-gold/20 pl-6">
-                    <h5 className="font-mono text-[10px] text-auric-gold/60 tracking-[0.2em] uppercase mb-3">[ BIOLOGICAL FUNCTION ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/80 uppercase tracking-wide">{activeDefinition.function}</p>
+                  <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
+                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ BIOLOGICAL FUNCTION ]</h5>
+                    <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.function}</p>
                   </div>
                 </div>
 
-                <div className="pt-12 border-t border-auric-gold/10 flex items-center justify-between">
+                <div className="pt-16 mt-8 border-t border-auric-gold/10 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 bg-bio-cyan rounded-full animate-ping" />
-                    <span className="text-[10px] text-bio-cyan/60 font-mono uppercase tracking-[0.2em]">Live Resonance</span>
+                    <span className="text-[10px] text-bio-cyan/50 font-mono uppercase tracking-[0.2em]">Signal Stable</span>
                   </div>
-                  <div className="font-mono text-[9px] text-white/20 tracking-tighter">REF_SYN_04.9</div>
+                  <div className="font-mono text-[9px] text-white/20 tracking-widest">ARC_REF_7.2</div>
                 </div>
               </motion.div>
             ) : (
@@ -314,10 +313,10 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.2 }}
                 exit={{ opacity: 0 }}
-                className="text-center font-mono text-[11px] uppercase tracking-[0.5em] text-auric-gold leading-loose border-[0.5px] border-auric-gold/20 p-12 bg-black/20 backdrop-blur-sm"
+                className="text-center font-mono text-[11px] uppercase tracking-[0.6em] text-auric-gold leading-loose border-[0.5px] border-auric-gold/10 p-16 bg-black/20"
               >
                 [ SYNC IDLE ]<br />
-                <span className="text-[9px] tracking-[0.3em] opacity-60">Hover Research Terms to Synchronize Archive</span>
+                <span className="text-[10px] tracking-[0.3em] opacity-50 mt-4 block">Synchronizing archive via neural hover state...</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -326,16 +325,13 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
 
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 3px;
+          width: 2px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
           background: rgba(212, 175, 55, 0.02);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
           background: rgba(212, 175, 55, 0.15);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(212, 175, 55, 0.3);
         }
       `}</style>
     </motion.div>
