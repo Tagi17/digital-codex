@@ -9,11 +9,13 @@ import articlesData from "@/data/articles.json";
 import { NodeData } from "@/hooks/useNebula";
 
 interface Definition {
+  id: string;
   title: string;
+  definition: string;
   concept: string;
   mechanism: string;
-  function: string;
-  image: string;
+  biological_function: string;
+  image?: string;
 }
 
 interface TermProps {
@@ -48,12 +50,16 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
   const [activeTermId, setActiveTermId] = useState<string | null>(null);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const blockRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   
   const targetId = contentId || nodeData.articleId;
   const article = targetId ? (articlesData as any)[targetId] : null;
 
-  // 1. DATA ACCESS FIX & RENDER GUARD
+  // 1. DATA LOOKUP REPAIR & SAFETY GUARD
+  const activeDefinition = useMemo(() => {
+    if (!activeTermId || !Array.isArray(journeyData)) return null;
+    return (journeyData as Definition[]).find(item => item.id === activeTermId) || null;
+  }, [activeTermId]);
+
   const headings = useMemo(() => {
     if (!article || !article.content) return [];
     return article.content
@@ -71,7 +77,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     restDelta: 0.001
   });
 
-  // CURSOR RESTORE & SCROLL LOCK
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -88,7 +93,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     };
   }, []);
 
-  // SCROLL-SPY LOGIC
   useEffect(() => {
     if (!scrollContainerRef.current || headings.length === 0) return;
 
@@ -123,11 +127,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
-
-  const activeDefinition = useMemo(() => {
-    if (!activeTermId) return null;
-    return (journeyData.definitions as Record<string, Definition>)[activeTermId] || null;
-  }, [activeTermId]);
 
   const parseText = (text: string) => {
     const parts = text.split(/(<Term id='.*?'>.*?<\/Term>)/g);
@@ -181,12 +180,18 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         return (
           <figure key={index} className={`${commonClass} group w-full`}>
             <div className="relative aspect-video w-full overflow-hidden border border-auric-gold/10 bg-black/40">
-              <Image 
-                src={block.url} 
-                alt={block.caption || ""} 
-                fill 
-                className="object-cover opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
-              />
+              {block.url ? (
+                <Image 
+                  src={block.url} 
+                  alt={block.caption || ""} 
+                  fill 
+                  className="object-cover opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center font-mono text-[10px] text-white/20 uppercase tracking-widest">
+                  [ Image Data Stream Offline ]
+                </div>
+              )}
             </div>
             {block.caption && (
               <figcaption className="mt-3 font-mono text-[10px] text-bio-cyan/60 uppercase tracking-[0.3em] italic">
@@ -217,8 +222,8 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     }
   };
 
-  // 2. RENDER GUARD
-  if (!article || !article.content) return null;
+  // RENDER GUARD
+  if (!article || !article.content || !Array.isArray(journeyData)) return null;
 
   return (
     <motion.div 
@@ -319,13 +324,19 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                 <div className="flex flex-col gap-6 mb-16">
                   <div className="w-20 h-20 border border-bio-cyan/20 bg-black/40 p-5 relative overflow-hidden self-start">
                     <div className="absolute inset-0 bg-bio-cyan/5 animate-pulse" />
-                    <Image 
-                      src={activeDefinition.image} 
-                      alt={activeDefinition.title}
-                      width={40}
-                      height={40}
-                      className="invert brightness-200 relative z-10"
-                    />
+                    {activeDefinition.image ? (
+                      <Image 
+                        src={activeDefinition.image} 
+                        alt={activeDefinition.title}
+                        width={40}
+                        height={40}
+                        className="invert brightness-200 relative z-10"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-auric-gold/40">
+                        <Settings size={24} />
+                      </div>
+                    )}
                   </div>
                   <div>
                     <h4 className="font-mono text-[10px] text-bio-cyan/60 tracking-[0.4em] uppercase mb-3">Neural Sync Active</h4>
@@ -335,18 +346,18 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
 
                 <div className="space-y-10">
                   <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
-                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ DEFINITION ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/80 uppercase tracking-widest leading-[1.8]">{activeDefinition.concept}</p>
+                    <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ CONCEPT ]</h5>
+                    <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.concept}</p>
                   </div>
 
                   <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
                     <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ MECHANISM ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/80 uppercase tracking-widest leading-[1.8]">{activeDefinition.mechanism}</p>
+                    <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.mechanism}</p>
                   </div>
 
                   <div className="border-l-[0.5px] border-auric-gold/30 pl-8">
                     <h5 className="font-mono text-[10px] text-auric-gold tracking-[0.3em] uppercase mb-4 opacity-60">[ BIOLOGICAL FUNCTION ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.function}</p>
+                    <p className="font-mono text-[11px] leading-relaxed text-white/90 uppercase tracking-widest leading-[1.8]">{activeDefinition.biological_function}</p>
                   </div>
                 </div>
 
