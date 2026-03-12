@@ -43,7 +43,6 @@
         "text": "[THE RECEIVER NEURON: SOMATOSENSORY CORTEX]"
       },
       {
-
             "type": "heading-small",
             "text": "THE CHOLINERGIC PLUG: THE FILTER OF INTENT"
           },
@@ -120,6 +119,39 @@
         "type": "deep-dive",
         "label": "THE BALL-AND-CHAIN MECHANISM",
         "text": "The H-gate physically blocks the channel like a tethered ball. This mechanical blockage is what prevents your thoughts from 'back-firing' and ensures your biological energy is directed exactly where your focus is placed."
+      },
+      {
+        "type": "heading",
+        "text": "[The Hand Terminal- Nerve to Tissue]"
+      },
+      {
+        "type": "heading",
+        "text": "[PHASE 4: THE HAND TERMINAL — NERVE TO TISSUE]"
+      },
+      {
+        "type": "paragraph",
+        "text": "The electrical wave finally reaches its destination: the dense network of nerve endings in your fingertips. Here, the 'Digital' signal of the nervous system must be translated into the 'Analog' response of the physical body."
+      },
+      
+      {
+        "type": "heading-small",
+        "text": "THE FINAL CONVERSION: ELECTRICITY TO CHEMICAL COMMAND"
+      },
+      {
+        "type": "dash-list",
+        "items": [
+          "**The Final Calcium Surge:** Just like in the brain, the incoming Sodium wave makes the nerve terminal positive, popping open the <Term id='calcium-channels'>Voltage-Gated Calcium Channels</Term>.",
+          "**The Local ACh Release:** Calcium enters and binds to <Term id='synaptotagmin'>Synaptotagmin</Term>, which activates the <Term id='snare-proteins'>SNARE proteins</Term>. These vesicles pop open and dump <Term id='acetylcholine'>ACh</Term> locally onto the nearby blood vessel walls.",
+          "**The Vessel Command:** ACh clicks into the <Term id='muscarinic-receptors'>Muscarinic Receptors</Term> on the vessel wall, triggering the <Term id='endoplasmic-reticulum'>Endoplasmic Reticulum</Term> (internal storage) to dump even more Calcium into the cell fluid."
+        ]
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "deep-dive",
+        "label": "THE CALCIUM AMPLIFIER",
+        "text": "The Endoplasmic Reticulum acts like a pressurized reservoir. When the 'spark' of ACh hits the receptor, it doesn't just send a signal; it releases a flood of stored Calcium, amplifying your mental intent into a physical metabolic surge."
       },
       {
         "type": "heading",

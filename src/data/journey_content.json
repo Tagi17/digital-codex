@@ -94,5 +94,13 @@
     "concept": "The System Reset.",
     "mechanism": "Sodium channels close and Potassium (K⁺) channels open, allowing positive ions to exit the cell, dropping the internal voltage back down to its negative baseline.",
     "biological_function": "Prevents the neuron from staying 'stuck' in a firing state, allowing the system to clear and prepare for the next focused intent."
-  }
+  },
+  {
+  "id": "endoplasmic-reticulum",
+  "title": "Endoplasmic Reticulum (ER)",
+  "definition": "A multifunctional organelle that serves as the primary storage site for intracellular Calcium.",
+  "concept": "The Cellular Reservoir.",
+  "mechanism": "When triggered by ACh, the ER opens its gates, flooding the cell with Calcium to activate metabolic enzymes like eNOS.",
+  "biological_function": "Acts as an amplifier, turning a small chemical signal into a massive metabolic shift."
+}
 ]
