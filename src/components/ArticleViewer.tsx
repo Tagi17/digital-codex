@@ -55,17 +55,11 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
   const targetId = contentId || nodeData.articleId;
   const article = targetId ? (articlesData as any)[targetId] : null;
 
-  // 1. THE HELPER FUNCTION (Modified for React Safety)
-  // Note: We use React nodes instead of dangerouslySetInnerHTML to preserve 
-  // the Term component's hover state logic and state updates.
   const renderFormattedText = (text: string) => {
     if (!text) return "";
-    
-    // Split by both Term tags and Markdown bold markers
     const parts = text.split(/(<Term id='.*?'>.*?<\/Term>|\*\*.*?\*\*)/g);
     
     return parts.map((part, index) => {
-      // Handle <Term> tags
       const termMatch = part.match(/<Term id='(.*?)'>(.*?)<\/Term>/);
       if (termMatch) {
         return (
@@ -75,7 +69,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         );
       }
       
-      // Handle **bold** text
       const boldMatch = part.match(/\*\*(.*?)\*\*/);
       if (boldMatch) {
         return (
@@ -89,7 +82,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     });
   };
 
-  // LOGIC CORRECTION
   const activeDefinition = useMemo(() => {
     if (!activeTermId || !Array.isArray(journeyData)) return null;
     return (journeyData as Definition[]).find((item: Definition) => item.id === activeTermId) || null;
@@ -146,7 +138,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
     headings.forEach((h: any) => {
       const id = `heading-${h.index}`;
       const el = document.getElementById(id);
@@ -262,10 +253,11 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-obsidian/98 backdrop-blur-3xl flex selection:bg-auric-gold/20 pointer-events-auto"
+      className="fixed inset-0 z-[100] bg-obsidian/98 backdrop-blur-3xl flex selection:bg-auric-gold/20 pointer-events-auto overflow-hidden"
       style={{ pointerEvents: 'all' }}
     >
-      <aside className="w-[240px] h-full border-r-[0.5px] border-auric-gold/20 flex flex-col p-8 pt-24 shrink-0 bg-black/20">
+      {/* 1. LEFT SIDEBAR: THE INDEX */}
+      <aside className="w-[240px] h-full border-r-[0.5px] border-auric-gold/20 flex flex-col p-8 pt-24 shrink-0 bg-black/20 relative z-30 pointer-events-auto">
         <button 
           onClick={onClose}
           className="font-mono text-[11px] text-auric-gold hover:text-white transition-all tracking-[0.2em] mb-20 flex items-center gap-3 group cursor-pointer border-[0.5px] border-auric-gold/30 p-4 bg-black/40 backdrop-blur-md hover:cursor-pointer"
@@ -298,8 +290,9 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         </nav>
       </aside>
 
-      <main className="flex-1 h-full relative flex flex-col items-center overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-auric-gold/10 overflow-hidden">
+      {/* 2. CENTER PANE: THE RESEARCH (INTERACTIVE AREA) */}
+      <main className="flex-1 h-full relative flex flex-col items-center overflow-hidden z-10">
+        <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-auric-gold/10 overflow-hidden pointer-events-none">
           <motion.div 
             className="w-full h-full bg-auric-gold origin-top shadow-[0_0_10px_#D4AF37]"
             style={{ scaleY }}
@@ -308,9 +301,10 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
 
         <div 
           ref={scrollContainerRef}
-          className="w-full h-full overflow-y-auto custom-scrollbar px-16 lg:px-32 py-24 scroll-smooth"
+          className="w-full h-full overflow-y-auto custom-scrollbar px-16 lg:px-32 py-24 scroll-smooth relative z-20"
+          style={{ scrollbarGutter: 'stable' }}
         >
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto pointer-events-auto">
             <header className="mb-24 relative">
               <div className="font-mono text-[11px] text-bio-cyan/50 tracking-[0.6em] uppercase mb-6 flex items-center gap-4">
                 <span className="w-10 h-[1px] bg-bio-cyan/20" />
@@ -339,7 +333,8 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         </div>
       </main>
 
-      <aside className="w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/50 shrink-0 p-12 flex flex-col relative">
+      {/* 3. RIGHT SIDEBAR: THE SYNC PANE */}
+      <aside className="w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/50 shrink-0 p-12 flex flex-col relative z-30 pointer-events-auto">
         <div className="h-full flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {activeDefinition ? (
@@ -416,16 +411,17 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
 
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 2px;
+          width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(212, 175, 55, 0.02);
+          background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(212, 175, 55, 0.15);
+          background: rgba(212, 175, 55, 0.3);
+          border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(212, 175, 55, 0.3);
+          background: rgba(212, 175, 55, 0.8);
         }
       `}</style>
     </motion.div>
