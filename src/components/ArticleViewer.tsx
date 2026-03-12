@@ -25,7 +25,7 @@ interface TermProps {
 const Term: React.FC<TermProps> = ({ id, children, onHover }) => {
   return (
     <span
-      className="cursor-help transition-all duration-300 relative group inline-block"
+      className="cursor-help transition-all duration-300 relative group inline-block hover:cursor-pointer"
       onMouseEnter={() => onHover(id)}
       onMouseLeave={() => onHover(null)}
     >
@@ -46,7 +46,9 @@ interface ArticleViewerProps {
 
 const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, contentId }) => {
   const [activeTermId, setActiveTermId] = useState<string | null>(null);
+  const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   
   const targetId = contentId || nodeData.articleId;
   const article = targetId ? (articlesData as any)[targetId] : null;
@@ -61,23 +63,62 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     restDelta: 0.001
   });
 
-  // 1. PERMANENT CURSOR RESTORE (Brute Force)
+  // 1. PERMANENT CURSOR RESTORE & SCROLL LOCK
   useEffect(() => {
-    const originalStyle = window.getComputedStyle(document.body).overflow;
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     
-    // Inject a global style tag to force cursor visibility
     const style = document.createElement('style');
-    style.id = 'article-cursor-fix';
+    style.id = 'article-cursor-force-fix';
     style.innerHTML = `* { cursor: auto !important; }`;
     document.head.appendChild(style);
     
     return () => {
-      document.body.style.overflow = originalStyle;
-      const styleTag = document.getElementById('article-cursor-fix');
+      document.body.style.overflow = originalOverflow;
+      const styleTag = document.getElementById('article-cursor-force-fix');
       if (styleTag) styleTag.remove();
     };
   }, []);
+
+  // 2. SCROLL-SPY LOGIC (Intersection Observer)
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+
+    const observerOptions = {
+      root: scrollContainerRef.current,
+      rootMargin: '-10% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSectionId(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    // Observe each section
+    const currentRefs = sectionRefs.current;
+    Object.values(currentRefs).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      Object.values(currentRefs).forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, [article]);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const activeDefinition = useMemo(() => {
     if (!activeTermId) return null;
@@ -153,36 +194,41 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       className="fixed inset-0 z-[100] bg-obsidian/98 backdrop-blur-3xl flex selection:bg-auric-gold/20 pointer-events-auto"
       style={{ pointerEvents: 'all' }}
     >
-      {/* 2. UI ALIGNMENT (The 3-Pane Codex) */}
-
-      {/* LEFT SIDEBAR: NAVIGATION INDEX (220px) */}
+      {/* LEFT SIDEBAR: NAVIGATION INDEX */}
       <aside className="w-[220px] h-full border-r-[0.5px] border-auric-gold/20 flex flex-col p-8 pt-24 shrink-0 bg-black/20">
         <button 
           onClick={onClose}
-          className="font-mono text-[11px] text-auric-gold hover:text-white transition-all tracking-[0.2em] mb-20 flex items-center gap-3 group cursor-pointer border-[0.5px] border-auric-gold/30 p-4 bg-black/40 backdrop-blur-md"
+          className="font-mono text-[11px] text-auric-gold hover:text-white transition-all tracking-[0.2em] mb-20 flex items-center gap-3 group cursor-pointer border-[0.5px] border-auric-gold/30 p-4 bg-black/40 backdrop-blur-md hover:cursor-pointer"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           [ BACK TO NEBULA ]
         </button>
 
-        <nav className="space-y-10 overflow-y-auto custom-scrollbar pr-4">
+        <nav className="space-y-8 overflow-y-auto custom-scrollbar pr-4">
           <div className="text-[10px] font-mono text-bio-cyan/40 tracking-[0.4em] uppercase mb-6 border-b border-bio-cyan/20 pb-2">Research Index</div>
-          {article.sections.map((section: any) => (
-            <div key={section.id} className="group cursor-pointer">
-              <div className="font-mono text-[11px] text-auric-gold group-hover:text-auric-gold/60 transition-colors mb-1">
-                [{section.id}]
-              </div>
-              <div className="font-mono text-[11px] text-white/40 group-hover:text-white transition-colors uppercase tracking-[0.2em] leading-snug">
-                {section.title}
-              </div>
-            </div>
-          ))}
+          {article.sections.map((section: any) => {
+            const isActive = activeSectionId === `section-${section.id}`;
+            return (
+              <button 
+                key={section.id} 
+                onClick={() => scrollToSection(`section-${section.id}`)}
+                className="group flex flex-col items-start w-full text-left transition-all duration-300 hover:cursor-pointer"
+              >
+                <div className={`flex items-center gap-3 font-mono text-[11px] mb-1 transition-all duration-300 ${isActive ? 'text-auric-gold' : 'text-auric-gold/40'}`}>
+                  {isActive && <motion.div layoutId="active-dot" className="w-1 h-1 bg-auric-gold rounded-full shadow-[0_0_8px_#D4AF37]" />}
+                  [{section.id}]
+                </div>
+                <div className={`font-mono text-[11px] uppercase tracking-[0.2em] leading-snug transition-all duration-300 ${isActive ? 'text-white scale-105' : 'text-white/40 group-hover:text-white/70'}`}>
+                  {section.title}
+                </div>
+              </button>
+            );
+          })}
         </nav>
       </aside>
 
       {/* CENTER PANE: THE RESEARCH (SCROLLABLE) */}
       <main className="flex-1 h-full relative flex flex-col items-center overflow-hidden">
-        {/* Progress Line */}
         <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-auric-gold/10 overflow-hidden">
           <motion.div 
             className="w-full h-full bg-auric-gold origin-top shadow-[0_0_10px_#D4AF37]"
@@ -204,15 +250,20 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                 {article.title}
               </h1>
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4 font-mono text-[10px] text-white/30 tracking-[0.3em] uppercase border-y border-auric-gold/10 py-6">
-                <span className="flex items-center gap-2">AUTH: <span className="text-white/60">LUMINOUS ARCHIVE</span></span>
-                <span className="flex items-center gap-2">CYCLE: <span className="text-white/60">0x4F92</span></span>
-                <span className="flex items-center gap-2">ID: <span className="text-white/60">{targetId}</span></span>
+                <span>AUTH: <span className="text-white/60">LUMINOUS ARCHIVE</span></span>
+                <span>CYCLE: <span className="text-white/60">0x4F92</span></span>
+                <span>ID: <span className="text-white/60">{targetId}</span></span>
               </div>
             </header>
 
             <article className="relative">
               {article.sections.map((section: any) => (
-                <section key={section.id} className="mb-24">
+                <section 
+                  key={section.id} 
+                  id={`section-${section.id}`}
+                  ref={(el) => { sectionRefs.current[`section-${section.id}`] = el; }}
+                  className="mb-24 scroll-mt-24"
+                >
                   <div className="flex items-center gap-6 mb-12">
                     <span className="font-mono text-xs text-auric-gold tracking-[0.4em]">[{section.id}]</span>
                     <div className="h-[0.5px] flex-1 bg-auric-gold/10" />
@@ -221,7 +272,6 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                 </section>
               ))}
 
-              {/* 4. THE 'DEEP DIVE' BOX */}
               <div className="mt-32 p-10 border border-auric-gold/30 bg-auric-gold/[0.02] backdrop-blur-sm relative overflow-hidden group">
                 <div className="absolute top-0 left-0 w-[2px] h-full bg-auric-gold/50" />
                 <div className="flex items-start gap-8 relative z-10">
@@ -253,7 +303,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         </div>
       </main>
 
-      {/* 3. RIGHT SIDEBAR: THE AURA SYNC PANE (350px) */}
+      {/* RIGHT SIDEBAR: THE AURA SYNC PANE */}
       <aside className="w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/50 shrink-0 p-12 flex flex-col relative">
         <div className="h-full flex flex-col justify-center">
           <AnimatePresence mode="wait">
