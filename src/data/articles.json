@@ -6,7 +6,7 @@
     "content": [
       {
         "type": "paragraph",
-        "text": "When you have a thought backed by intent—in this example focusing on your hand—you activate that specific area. This mental state acts as the catalyst for electrical and chemical surges leading to sensations and the output of a Bio-field."
+        "text": "When you have a thought backed by intent—in this example focusing on your hand—you activate that specific area. This mental state acts as the catalyst for electrical and chemical surges leading to sensations and the output of a Bio-field. We will follow this process from the first spark in the brain to the heat in your fingertips."
       },
       {
         "type": "heading",
@@ -14,12 +14,12 @@
       },
       {
         "type": "paragraph",
-        "text": "To understand the journey, we must look at the <Term id='neuron'>Neuron</Term>, the fundamental unit of the nervous system. A neuron is composed of <Term id='dendrite'>Dendrites</Term> (receivers), a <Term id='soma'>Soma</Term> (the cell body), an <Term id='axon'>Axon</Term> (the transmission wire), and <Term id='synaptic-vesicles'>Synaptic Vesicles</Term> which store neurotransmitters."
+        "text": "To understand the journey, we must look at the <Term id='neuron'>Neuron</Term>, the fundamental unit of the nervous system that transmits information throughout the body and brain via electrical and chemical signals. A neuron is composed of <Term id='dendrite'>Dendrites</Term> branches that receive neurons, a <Term id='soma'>Soma</Term> the cell body, an <Term id='axon'>Axon</Term> the long wire for transmitting impulses, and <Term id='synaptic-vesicles'>Synaptic Vesicles</Term> small membrane bound sacs located in the Axon terminal, which store, transport, and release neurotransmitters into the synapse, the communication space between neurons." 
       },
       {
         "type": "image",
-        "url": "/images/neuron-structure.jpg",
-        "caption": "Figure 1: Anatomy of a Polarized Neuron — The Biological Battery."
+        "url": "/images/neuron.jpg",
+        "caption": "Figure 1: Anatomy of a Neuron — The Biological Battery."
       },
       {
         "type": "heading",
