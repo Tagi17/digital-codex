@@ -34,8 +34,8 @@
         "items": [
           "**Reaching Threshold:** The Sender neuron builds up electrical pressure until they reach their <Term id='threshold-potential'>Threshold Potential</Term> (-55mV).",
           "T**he Sodium Wave:** Once the treshold is hit, it triggers an <Term id='action-potential'>Action Potential</Term>. A wave of Sodium (Na+) rushes into the neuron, and this wave of positivity travels down the Axon towards the terminal tip.",
-          "**The Calcium Trigger:** When the Sodium wave hits the tip, the internal voltage flips from negative to positive, a <Term id='depolarization'>Depolarization<Term id='depolarization'> effect. This positivity, electrostatically repels the positive sensors inside the <Term id='calcium-channels'>Voltage-Gated Calcium Channels</Term>, pushing them open.",
-          "**The Release:** Calcium rushes in from the outside and acts as a physical activator binding to <Term id='snare-proteins'>SNARE proteins</Term>, Glutamate is a highly reactive neurotransmitter, therefore is contained within tiny bubble in the synaptic vesicles, Cakciusm grabs the bubbles - Synaptic vesicles and releases <Term id='glutamate'>Glutamate</Term> into the Synapse."
+          "**The Calcium Trigger:** When the Sodium wave hits the tip, the internal voltage flips from negative to positive, a <Term id='depolarization'>Depolarization</Term> effect. This positivity, electrostatically repels the positive sensors inside the <Term id='calcium-channels'>Voltage-Gated Calcium Channels</Term>, pushing them open.",
+          "**The Release:** Calcium rushes in from the outside and acts as a physical activator binding to <Term id='snare-proteins'>SNARE proteins</Term>, Glutamate is a highly reactive neurotransmitter, therefore is contained within tiny bubble in the synaptic vesicles, Calcium grabs the bubbles - Synaptic vesicles and releases <Term id='glutamate'>Glutamate</Term> into the Synapse."
         ]
       },
       {
@@ -43,9 +43,7 @@
         "text": "[THE RECEIVER NEURON: SOMATOSENSORY CORTEX]"
       },
       {
-        "type": "dash-list",
-        "items": [
-          {
+
             "type": "heading-small",
             "text": "THE CHOLINERGIC PLUG: THE FILTER OF INTENT"
           },
@@ -78,9 +76,7 @@
           {
             "type": "paragraph",
             "text": "In this state, the thought is a weak electric signal. This is why a fleeting thought is synonymous with a single neuron; a single un-amplified neuron has no power to influence the body. However, because your focused intent has provided the ACh to plug the leaking Potassium, the Sodium shout maintains its voltage. The signal is able to survive the struggle, remains strong, and hits the Soma’s -55mV threshold, officially turning the thought into a physical command."
-          }
-        ]
-      },
+          },
       {
         "type": "heading",
         "text": "[THE PNS RELAY: THE HIGHWAY]"
