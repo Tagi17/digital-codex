@@ -45,9 +45,40 @@
       {
         "type": "dash-list",
         "items": [
-          "**The Cholinergic Plug:** Intent triggers the <Term id='cholinergic-system'>Cholinergic System</Term> to spray <Term id='acetylcholine'>ACh</Term> onto the receiver, 'plugging' the Potassium leaks to ensure the signal is heard.",
-          "**The Chemical Key:** Glutamate binds to <Term id='ampa-receptors'>AMPA receptors</Term>, allowing a rush of Sodium to flood the dendrite.",
-          "**The Struggle:** The thought becomes an <Term id='epsp'>EPSP</Term>, fighting through internal structures to reach the Soma and trigger a physical command."
+          {
+            "type": "heading-small",
+            "text": "THE CHOLINERGIC PLUG: THE FILTER OF INTENT"
+          },
+          {
+            "type": "paragraph",
+            "text": "Your focused intent triggers the <Term id='cholinergic-system'>Cholinergic System</Term> to spray <Term id='acetylcholine'>ACh</Term> onto the receiver’s dendrites. Normally, dendrites are considered \"porous pipes\" that leak Potassium (K⁺) to filter out the background noise. Your brain distinguishes what to filter out based on the priority of the signal; by constantly leaking Potassium, the brain effectively \"silences\" the millions of weak informational inputs your body generates every second. This ensures that only a signal strong enough to pass the voltage threshold acts as a \"shout,\" which is then automatically taken to be processed further. ACh acts as the physical plug for these holes, turning the whisper of your intent into the necessary shout by preventing the electricity from escaping."
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "heading-small",
+            "text": "THE SPARK (EPSP): THE CHEMICAL KEY"
+          },
+          {
+            "type": "paragraph",
+            "text": "The <Term id='glutamate'>Glutamate</Term> from the Sender neuron binds to the Ligand-Gated Sodium channels (specifically the <Term id='ampa-receptors'>AMPA receptors</Term>) on the Receivers’ dendrite. The chemical binding acts like a key turning a lock, causing the Sodium channels to open, allowing a rush of positive Sodium to flood the dendrite."
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "heading-small",
+            "text": "THE STRUGGLE: THE JOURNEY TO THE SOMA"
+          },
+          {
+            "type": "paragraph",
+            "text": "This thought is now in <Term id='epsp'>EPSP</Term> form (Excitatory Postsynaptic Potential)—a raw electrical message. On its way to the Soma, the Sodium ions repel each other because of their like positive charges and must fight through a \"crowd\" of internal proteins and structures as it travels."
+          },
+          {
+            "type": "paragraph",
+            "text": "In this state, the thought is a weak electric signal. This is why a fleeting thought is synonymous with a single neuron; a single un-amplified neuron has no power to influence the body. However, because your focused intent has provided the ACh to plug the leaking Potassium, the Sodium shout maintains its voltage. The signal is able to survive the struggle, remains strong, and hits the Soma’s -55mV threshold, officially turning the thought into a physical command."
+          }
         ]
       },
       {
