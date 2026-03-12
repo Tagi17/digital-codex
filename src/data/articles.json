@@ -1,18 +1,56 @@
 {
   "intent-to-aura": {
     "title": "Cellular Bio-Electricity: From Intent to Aura",
-    "content": [
+    "sections": [
       {
-        "type": "paragraph",
-        "text": "The <Term id='coherence'>quantum coherence</Term> observed in biological systems suggests a level of precision that transcends classical thermodynamics. This phenomenon, often termed <Term id='biophotons'>biophoton emission</Term>, is not merely a byproduct of metabolic activity but a fundamental communication channel within the <Term id='microtubules'>microtubules</Term> of living cells."
+        "id": "1.0",
+        "title": "INTRODUCTION",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The <Term id='coherence'>quantum coherence</Term> observed in biological systems suggests a level of precision that transcends classical thermodynamics. This phenomenon, often termed <Term id='biophotons'>biophoton emission</Term>, is not merely a byproduct of metabolic activity but a fundamental communication channel within the <Term id='microtubules'>microtubules</Term> of living cells."
+          },
+          {
+            "type": "heading",
+            "text": "The Bio-Electric Spark"
+          },
+          {
+            "type": "paragraph",
+            "text": "Every cognitive impulse begins as a localized fluctuation in the <Term id='neural-nebula'>neural nebula</Term>, a dense network of synaptic potential that precedes physical manifestation. This is the 'Intent' phase of the bio-electric journey."
+          }
+        ]
       },
       {
-        "type": "paragraph",
-        "text": "As we delve deeper into the <Term id='bio-resonant-fields'>bio-resonant fields</Term>, we observe that the resonance patterns align with specific harmonic frequencies that regulate cellular growth. The interaction between these fields and external <Term id='electromagnetic-induction'>electromagnetic induction</Term> creates a complex dance of energy transfer."
+        "id": "2.0",
+        "title": "THE RELAY",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "As we delve deeper into the <Term id='bio-resonant-fields'>bio-resonant fields</Term>, we observe that the resonance patterns align with specific harmonic frequencies that regulate cellular growth. The interaction between these fields and external <Term id='electromagnetic-induction'>electromagnetic induction</Term> creates a complex dance of energy transfer."
+          },
+          {
+            "type": "bullet-list",
+            "items": [
+              "Phase I: Sub-threshold axonal oscillation",
+              "Phase II: Non-linear synaptic integration",
+              "Phase III: Trans-boundary field manifestation"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The transition from internal potential to external 'Aura' requires a specific state of <Term id='coherence'>coherence</Term> across the entire bio-circuitry."
+          }
+        ]
       },
       {
-        "type": "paragraph",
-        "text": "The <Term id='neural-nebula'>neural nebula</Term> serves as the primary interface for this energy. By mapping the axonal pathways, researchers have identified nodes of high-intensity luminescence that correspond to peak cognitive performance."
+        "id": "3.0",
+        "title": "CONCLUSION",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The final stage of this journey is the stabilization of the human biofield, creating a resonant boundary that interacts with the larger environmental matrix."
+          }
+        ]
       }
     ]
   }
