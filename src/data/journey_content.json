@@ -3,320 +3,360 @@
     "id": "mitochondria",
     "title": "Mitochondria",
     "definition": "Double-membrane-bound organelles responsible for generating most of the cell's supply of adenosine triphosphate (ATP).",
-    "concept": "The Cellular Power Plant.",
-    "mechanism": "Utilizes the Electron Transport Chain (ETC) to create a proton gradient that drives ATP synthesis.",
-    "biological_function": "Produces the metabolic heat and infrared energy felt as 'warmth' during focused intent."
+    "concept": "The cellular power plant.",
+    "mechanism": "Utilizes the electron transport chain (ETC) to create a proton gradient that drives ATP synthesis.",
+    "biological_function": "Produces the metabolic heat and infrared energy felt as 'warmth' during focused intent.",
+    "category": "Process"
   },
   {
     "id": "sodium-potassium-pump",
-    "title": "Sodium-Potassium Pump (Na+/K+-ATPase)",
+    "title": "Sodium-potassium pump (Na+/K+-ATPase)",
     "definition": "An active transport protein that moves 3 sodium ions out of the cell and 2 potassium ions in against their concentration gradients.",
-    "concept": "The Biological Battery Charger.",
+    "concept": "The biological battery charger.",
     "mechanism": "Consumes ATP to flip its internal structure, physically pushing ions across the membrane to reset the electrical potential.",
-    "biological_function": "Maintains the -70mV resting potential, keeping the neuron 'loaded' and ready to fire."
+    "biological_function": "Maintains the -70mV resting potential, keeping the neuron 'loaded' and ready to fire.",
+    "category": "Process"
   },
   {
     "id": "leak-channels",
-    "title": "Potassium Leak Channels",
+    "title": "Potassium leak channels",
     "definition": "Passive trans-membrane proteins that allow potassium ions to slowly exit the cell along their chemical gradient.",
-    "concept": "The Porous Filter.",
+    "concept": "The porous filter.",
     "mechanism": "They remain open at rest, allowing K+ to 'leak' out, which prevents weak electrical signals from reaching the firing threshold.",
-    "biological_function": "Acts as the brain's noise-cancellation system, silencing background neural static."
+    "biological_function": "Acts as the brain's noise-cancellation system, silencing background neural static.",
+    "category": "Barrier"
   },
   {
     "id": "snare-proteins",
-    "title": "SNARE Proteins",
+    "title": "SNARE proteins",
     "definition": "A large family of proteins that mediate the docking and fusion of synaptic vesicles with the target membrane.",
-    "concept": "The Biological Winch.",
+    "concept": "The biological winch.",
     "mechanism": "Complementary proteins on the vesicle and membrane entwine like a zipper, pulling the membranes together to form a fusion pore.",
-    "biological_function": "Enables the near-instantaneous release of neurotransmitters in response to Calcium influx."
+    "biological_function": "Enables the near-instantaneous release of neurotransmitters in response to calcium influx.",
+    "category": "Process"
   },
   {
     "id": "calcium-calmodulin-complex",
-    "title": "Calcium-Calmodulin Complex",
-    "definition": "The structural union formed when Calcium ions bind to the protein Calmodulin, triggering a shape-change.",
-    "concept": "The Molecular Master Switch.",
+    "title": "Calcium-calmodulin complex",
+    "definition": "The structural union formed when calcium ions bind to the protein calmodulin, triggering a shape-change.",
+    "concept": "The molecular master switch.",
     "mechanism": "Once bound, the complex physically wraps around other proteins (like eNOS) to activate or inhibit them.",
-    "biological_function": "The bridge between the electrical signal (Calcium) and the physical result (Vasodilation)."
+    "biological_function": "The bridge between the electrical signal (calcium) and the physical result (vasodilation).",
+    "category": "Process"
   },
   {
     "id": "no-cgmp-pathway",
-    "title": "NO/cGMP Signaling Pathway",
-    "definition": "A major signaling cascade where Nitric Oxide triggers the production of cyclic Guanosine Monophosphate.",
-    "concept": "The Relaxation Protocol.",
+    "title": "NO/cGMP signaling pathway",
+    "definition": "A major signaling cascade where nitric oxide triggers the production of cyclic guanosine monophosphate.",
+    "concept": "The relaxation protocol.",
     "mechanism": "NO gas diffuses into smooth muscle cells, activating guanylyl cyclase, which produces cGMP to tell muscle fibers to 'let go'.",
-    "biological_function": "Triggers the widening of blood vessels (vasodilation) to flood tissues with oxygen and fuel."
+    "biological_function": "Triggers the widening of blood vessels (vasodilation) to flood tissues with oxygen and fuel.",
+    "category": "Process"
   },
   {
     "id": "etc-process",
-    "title": "Electron Transport Chain (ETC)",
+    "title": "Electron transport chain (ETC)",
     "definition": "A series of protein complexes in the mitochondrial membrane that transfer electrons via redox reactions.",
-    "concept": "The Molecular Waterfall.",
+    "concept": "The molecular waterfall.",
     "mechanism": "Electrons are passed through four complexes, pumping protons across the membrane to create a high-pressure energy gradient.",
-    "biological_function": "The core site of ion oscillation and electromagnetic field generation in the body."
+    "biological_function": "The core site of ion oscillation and electromagnetic field generation in the body.",
+    "category": "Process"
   },
   {
     "id": "polarization-voltage",
-    "title": "Polarization & Voltage",
+    "title": "Polarization & voltage",
     "definition": "The difference in electrical charge between the inside and outside of a cell membrane.",
-    "concept": "The Stored Potential.",
+    "concept": "The stored potential.",
     "mechanism": "Uneven ion distribution creates an electrical gradient (usually -70mV at rest) similar to a charged capacitor.",
-    "biological_function": "Provides the 'voltage' necessary for rapid signal transmission through the nervous system."
+    "biological_function": "Provides the 'voltage' necessary for rapid signal transmission through the nervous system.",
+    "category": "Barrier"
   },
   {
     "id": "ampere-maxwell-law",
-    "title": "Ampère–Maxwell Law",
+    "title": "Ampère–Maxwell law",
     "definition": "An electromagnetic principle stating that a changing electric field or a moving electric current induces a magnetic field.",
-    "concept": "The Physics of the Aura.",
+    "concept": "The physics of the aura.",
     "mechanism": "The rhythmic flipping of trillions of ions (current) generates an oscillating electromagnetic field surrounding the tissue.",
-    "biological_function": "Explains how the biological process of ion oscillation manifests as a measurable Bio-field or Aura."
+    "biological_function": "Explains how the biological process of ion oscillation manifests as a measurable bio-field or aura.",
+    "category": "Field"
   },
-{
-  "id": "polarization",
-  "title": "Cellular Polarization",
-  "definition": "The process of maintaining a distinct charge separation across a biological membrane.",
-  "concept": "The Loaded Spring.",
-  "mechanism": "By actively segregating ions—keeping Sodium (Na⁺) outside and Potassium (K⁺) inside—the cell creates an electrical tension between two poles.",
-  "biological_function": "Establishes the 'Resting Potential' required for a neuron to fire an Action Potential on command."
-},
-{
+  {
+    "id": "polarization",
+    "title": "Cellular polarization",
+    "definition": "The process of maintaining a distinct charge separation across a biological membrane.",
+    "concept": "The loaded spring.",
+    "mechanism": "By actively segregating ions—keeping sodium (Na⁺) outside and potassium (K⁺) inside—the cell creates an electrical tension between two poles.",
+    "biological_function": "Establishes the 'resting potential' required for a neuron to fire an action potential on command.",
+    "category": "Barrier"
+  },
+  {
     "id": "depolarization",
     "title": "Depolarization",
     "definition": "A sudden change within a cell during which the cell undergoes a dramatic shift in electric charge distribution.",
-    "concept": "The Spark of Action.",
-    "mechanism": "Voltage-gated Sodium channels pop open, allowing a rush of positive Na⁺ ions into the negative interior, flipping the charge from -70mV toward +30mV.",
-    "biological_function": "This is the actual 'firing' of the thought—the moment the electrical signal is committed to the journey."
+    "concept": "The spark of action.",
+    "mechanism": "Voltage-gated sodium channels pop open, allowing a rush of positive Na⁺ ions into the negative interior, flipping the charge from -70mV toward +30mV.",
+    "biological_function": "This is the actual 'firing' of the thought—the moment the electrical signal is committed to the journey.",
+    "category": "Barrier"
   },
   {
     "id": "repolarization",
     "title": "Repolarization",
     "definition": "The stage of an action potential in which the cell's membrane potential is restored to its negative resting state.",
-    "concept": "The System Reset.",
-    "mechanism": "Sodium channels close and Potassium (K⁺) channels open, allowing positive ions to exit the cell, dropping the internal voltage back down to its negative baseline.",
-    "biological_function": "Prevents the neuron from staying 'stuck' in a firing state, allowing the system to clear and prepare for the next focused intent."
+    "concept": "The system reset.",
+    "mechanism": "Sodium channels close and potassium (K⁺) channels open, allowing positive ions to exit the cell, dropping the internal voltage back down to its negative baseline.",
+    "biological_function": "Prevents the neuron from staying 'stuck' in a firing state, allowing the system to clear and prepare for the next focused intent.",
+    "category": "Barrier"
   },
   {
-  "id": "endoplasmic-reticulum",
-  "title": "Endoplasmic Reticulum (ER)",
-  "definition": "A multifunctional organelle that serves as the primary storage site for intracellular Calcium.",
-  "concept": "The Cellular Reservoir.",
-  "mechanism": "When triggered by ACh, the ER opens its gates, flooding the cell with Calcium to activate metabolic enzymes like eNOS.",
-  "biological_function": "Acts as an amplifier, turning a small chemical signal into a massive metabolic shift."
-},
-{
-  "id": "electrical-gradient",
-  "title": "Electrical Gradient",
-  "definition": "The difference in electrical charge between the inside and the outside of a neuron's membrane.",
-  "concept": "The Loaded Spring.",
-  "mechanism": "By keeping a high concentration of positive Sodium (Na+) outside and a negative charge inside (-70mV), the cell creates an 'electrical pull' that forces ions to rush in the moment a channel opens.",
-  "biological_function": "Provides the stored potential energy necessary to trigger an instantaneous Action Potential (the spark) without needing to generate energy from scratch every time."
-},
-{
+    "id": "endoplasmic-reticulum",
+    "title": "Endoplasmic reticulum (ER)",
+    "definition": "A multifunctional organelle that serves as the primary storage site for intracellular calcium.",
+    "concept": "The cellular reservoir.",
+    "mechanism": "When triggered by ACh, the ER opens its gates, flooding the cell with calcium to activate metabolic enzymes like eNOS.",
+    "biological_function": "Acts as an amplifier, turning a small chemical signal into a massive metabolic shift.",
+    "category": "Process"
+  },
+  {
+    "id": "electrical-gradient",
+    "title": "Electrical gradient",
+    "definition": "The difference in electrical charge between the inside and the outside of a neuron's membrane.",
+    "concept": "The loaded spring.",
+    "mechanism": "By keeping a high concentration of positive sodium (Na+) outside and a negative charge inside (-70mV), the cell creates an 'electrical pull' that forces ions to rush in the moment a channel opens.",
+    "biological_function": "Provides the stored potential energy necessary to trigger an instantaneous action potential (the spark) without needing to generate energy from scratch every time.",
+    "category": "Barrier"
+  },
+  {
     "id": "neuron",
     "title": "Neuron",
     "definition": "The specialized cell of the nervous system designed to transmit information.",
-    "concept": "The Biological Circuit.",
+    "concept": "The biological circuit.",
     "mechanism": "Uses a combination of internal electrical pulses and external chemical messengers to bridge long distances in the body.",
-    "biological_function": "The primary building block of thought, sensation, and movement."
+    "biological_function": "The primary building block of thought, sensation, and movement.",
+    "category": "Spark"
   },
   {
     "id": "dendrite",
     "title": "Dendrite",
     "definition": "The branch-like extensions of a neuron that receive incoming signals.",
-    "concept": "The Antennae.",
+    "concept": "The antennae.",
     "mechanism": "Covered in receptors that catch neurotransmitters from neighboring cells, converting chemical keys into electrical nudges.",
-    "biological_function": "The 'Input' stage where the neuron listens to the surrounding environment."
+    "biological_function": "The 'input' stage where the neuron listens to the surrounding environment.",
+    "category": "Spark"
   },
   {
     "id": "soma",
-    "title": "Soma (Cell Body)",
+    "title": "Soma (cell body)",
     "definition": "The central hub of the neuron containing the nucleus and organelles.",
-    "concept": "The Decision Center.",
+    "concept": "The decision center.",
     "mechanism": "Sums up all the incoming electrical 'whispers' (EPSPs) from the dendrites to see if they are strong enough to reach the threshold.",
-    "biological_function": "Maintains the cell's life and acts as the gatekeeper for signal transmission."
+    "biological_function": "Maintains the cell's life and acts as the gatekeeper for signal transmission.",
+    "category": "Spark"
   },
   {
     "id": "axon",
     "title": "Axon",
     "definition": "A long, slender projection that conducts electrical impulses away from the cell body.",
-    "concept": "The Transmission Wire.",
+    "concept": "The transmission wire.",
     "mechanism": "Propagates the action potential over long distances via a wave of opening and closing ion channels.",
-    "biological_function": "The 'Output' cable that carries the command from the brain to the target tissue."
+    "biological_function": "The 'output' cable that carries the command from the brain to the target tissue.",
+    "category": "Spark"
   },
   {
     "id": "synaptic-vesicle",
-    "title": "Synaptic Vesicle",
+    "title": "Synaptic vesicle",
     "definition": "Small, membrane-bound bubbles located in the axon terminal.",
-    "concept": "The Cargo Crates.",
+    "concept": "The cargo crates.",
     "mechanism": "Store neurotransmitters and dock at the cell membrane to release their contents into the synapse when triggered by calcium.",
-    "biological_function": "Protects reactive chemicals like Glutamate until the exact moment they are needed for signaling."
+    "biological_function": "Protects reactive chemicals like glutamate until the exact moment they are needed for signaling.",
+    "category": "Spark"
   },
   {
     "id": "threshold-potential",
-    "title": "Threshold Potential",
+    "title": "Threshold potential",
     "definition": "The specific voltage level (-55mV) required to trigger an action potential.",
-    "concept": "The Point of No Return.",
+    "concept": "The point of no return.",
     "mechanism": "When the cell's internal charge rises to this level, it causes voltage-gated sodium channels to pop open simultaneously.",
-    "biological_function": "Acts as a filter to prevent random 'noise' or weak thoughts from accidentally triggering a physical response."
+    "biological_function": "Acts as a filter to prevent random 'noise' or weak thoughts from accidentally triggering a physical response.",
+    "category": "Barrier"
   },
   {
     "id": "cholinergic-system",
-    "title": "Cholinergic System",
-    "definition": "The network of neurons and pathways that primarily use Acetylcholine (ACh) to communicate.",
-    "concept": "The Focus Engine.",
+    "title": "Cholinergic system",
+    "definition": "The network of neurons and pathways that primarily use acetylcholine (ACh) to communicate.",
+    "concept": "The focus engine.",
     "mechanism": "Modulates the 'leakiness' of neurons to sharpen signals and improve the signal-to-noise ratio.",
-    "biological_function": "Essential for attention, learning, and directing focused intent to specific body parts."
+    "biological_function": "Essential for attention, learning, and directing focused intent to specific body parts.",
+    "category": "Process"
   },
   {
     "id": "ampa-receptor",
-    "title": "AMPA Receptor",
-    "definition": "A specific type of receptor on the dendrite that responds to Glutamate.",
-    "concept": "The Sodium Doorway.",
-    "mechanism": "When Glutamate binds, the receptor changes shape to let positive Sodium (Na+) rush into the cell.",
-    "biological_function": "Responsible for the fast, initial 'spark' of a signal in the receiving neuron."
+    "title": "AMPA receptor",
+    "definition": "A specific type of receptor on the dendrite that responds to glutamate.",
+    "concept": "The sodium doorway.",
+    "mechanism": "When glutamate binds, the receptor changes shape to let positive sodium (Na+) rush into the cell.",
+    "biological_function": "Responsible for the fast, initial 'spark' of a signal in the receiving neuron.",
+    "category": "Spark"
   },
   {
     "id": "glutamate",
     "title": "Glutamate",
     "definition": "The most abundant excitatory neurotransmitter in the vertebrate nervous system.",
-    "concept": "The Universal 'Go' Signal.",
+    "concept": "The universal 'go' signal.",
     "mechanism": "Binds to receptors on the postsynaptic neuron to increase its internal positivity.",
-    "biological_function": "The primary chemical used to relay 'active' information across the gap between neurons."
+    "biological_function": "The primary chemical used to relay 'active' information across the gap between neurons.",
+    "category": "Process"
   },
   {
     "id": "epsp",
-    "title": "Excitatory Postsynaptic Potential (EPSP)",
+    "title": "Excitatory postsynaptic potential (EPSP)",
     "definition": "A temporary increase in the neuron's internal voltage that brings it closer to the threshold.",
-    "concept": "The Electrical Whisper.",
+    "concept": "The electrical whisper.",
     "mechanism": "Created by the localized influx of positive ions through receptors like AMPA.",
-    "biological_function": "A sub-threshold signal that must be combined with others to successfully 'fire' the neuron."
+    "biological_function": "A sub-threshold signal that must be combined with others to successfully 'fire' the neuron.",
+    "category": "Process"
   },
   {
     "id": "action-potential",
-    "title": "Action Potential",
+    "title": "Action potential",
     "definition": "A rapid, self-propagating electrical impulse that travels along the axon.",
-    "concept": "The Bio-Electric Wave.",
+    "concept": "The bio-electric wave.",
     "mechanism": "A chain reaction of sodium rushing in and potassium rushing out, creating a spike of energy.",
-    "biological_function": "The fundamental unit of communication that allows the brain to send 'real-time' commands to the hand."
+    "biological_function": "The fundamental unit of communication that allows the brain to send 'real-time' commands to the hand.",
+    "category": "Process"
   },
   {
     "id": "pns",
-    "title": "Peripheral Nervous System (PNS)",
+    "title": "Peripheral nervous system (PNS)",
     "definition": "The network of nerves outside the brain and spinal cord.",
-    "concept": "The Information Highway.",
+    "concept": "The information highway.",
     "mechanism": "Relays sensory data up to the brain and motor commands down to the muscles and organs.",
-    "biological_function": "Connects the 'Command Center' (Brain) to the 'Hardware' (Body)."
+    "biological_function": "Connects the 'command center' (brain) to the 'hardware' (body).",
+    "category": "Process"
   },
   {
     "id": "vgcc",
-    "title": "Voltage-Gated Calcium Channels",
+    "title": "Voltage-gated calcium channels",
     "definition": "Protein tunnels in the cell membrane that open specifically in response to a change in voltage.",
-    "concept": "The Positive Pressure Gates.",
-    "mechanism": "When the action potential hits the terminal, these gates detect the positivity and open to let Calcium (Ca2+) flood in.",
-    "biological_function": "Translates an electrical signal into a chemical action (the release of neurotransmitters)."
+    "concept": "The positive pressure gates.",
+    "mechanism": "When the action potential hits the terminal, these gates detect the positivity and open to let calcium (Ca2+) flood in.",
+    "biological_function": "Translates an electrical signal into a chemical action (the release of neurotransmitters).",
+    "category": "Barrier"
   },
   {
     "id": "ach",
     "title": "Acetylcholine (ACh)",
     "definition": "A versatile neurotransmitter used in both the brain and the body's peripheral tissues.",
-    "concept": "The Chemical Bridge.",
+    "concept": "The chemical bridge.",
     "mechanism": "In the hand, it bridges the gap between the nerve terminal and the blood vessel or muscle tissue.",
-    "biological_function": "Directly triggers the physical changes like vasodilation (blood flow) or muscle contraction."
+    "biological_function": "Directly triggers the physical changes like vasodilation (blood flow) or muscle contraction.",
+    "category": "Process"
   },
   {
     "id": "synaptotagmin",
     "title": "Synaptotagmin",
     "definition": "A protein found on the surface of synaptic vesicles that acts as a calcium sensor.",
-    "concept": "The Molecular Trigger.",
+    "concept": "The molecular trigger.",
     "mechanism": "When calcium levels rise, it grabs the calcium ions and instantly signals the SNARE proteins to fuse the vesicle to the membrane.",
-    "biological_function": "Ensures the chemical 'message' is released at the exact microsecond the electrical spark arrives."
+    "biological_function": "Ensures the chemical 'message' is released at the exact microsecond the electrical spark arrives.",
+    "category": "Spark"
   },
   {
     "id": "muscarinic-receptors",
-    "title": "Muscarinic Receptors",
-    "definition": "A class of G-protein coupled receptors that respond to Acetylcholine.",
-    "concept": "The Metabolic Switch.",
+    "title": "Muscarinic receptors",
+    "definition": "A class of G-protein coupled receptors that respond to acetylcholine.",
+    "concept": "The metabolic switch.",
     "mechanism": "Once ACh binds, these receptors trigger internal signaling cascades (like releasing calcium from the ER).",
-    "biological_function": "Regulates 'slow' biological responses like vessel relaxation and heart rate adjustment."
+    "biological_function": "Regulates 'slow' biological responses like vessel relaxation and heart rate adjustment.",
+    "category": "Process"
   },
   {
     "id": "atp",
-    "title": "ATP (Adenosine Triphosphate)",
+    "title": "ATP (adenosine triphosphate)",
     "definition": "The primary energy currency of the cell.",
-    "concept": "The Cellular Battery.",
+    "concept": "The cellular battery.",
     "mechanism": "Stores energy in high-energy phosphate bonds; when a bond is broken, it releases the power needed for pumps and enzymes to work.",
-    "biological_function": "Fueling the 'reset' of neurons and the physical work of vasodilation."
+    "biological_function": "Fueling the 'reset' of neurons and the physical work of vasodilation.",
+    "category": "Process"
   },
   {
     "id": "calmodulin",
     "title": "Calmodulin",
     "definition": "A calcium-binding messenger protein found in all eukaryotic cells.",
-    "concept": "The Master Sensor.",
-    "mechanism": "Once it binds to four Calcium ions, it changes its shape to 'hug' and activate other enzymes like eNOS.",
-    "biological_function": "Translates the presence of Calcium into a signal for the cell to start producing gas."
+    "concept": "The master sensor.",
+    "mechanism": "Once it binds to four calcium ions, it changes its shape to 'hug' and activate other enzymes like eNOS.",
+    "biological_function": "Translates the presence of calcium into a signal for the cell to start producing gas.",
+    "category": "Process"
   },
   {
     "id": "enos",
-    "title": "eNOS (Endothelial Nitric Oxide Synthase)",
+    "title": "eNOS (endothelial nitric oxide synthase)",
     "definition": "An enzyme located in the lining of blood vessels.",
-    "concept": "The Gas Generator.",
-    "mechanism": "Takes L-arginine and Oxygen and chemically converts them into Nitric Oxide gas when activated by Calmodulin.",
-    "biological_function": "The key catalyst for increasing blood flow and creating the 'aura' effect."
+    "concept": "The gas generator.",
+    "mechanism": "Takes L-arginine and oxygen and chemically converts them into nitric oxide gas when activated by calmodulin.",
+    "biological_function": "The key catalyst for increasing blood flow and creating the 'aura' effect.",
+    "category": "Process"
   },
   {
     "id": "caveolin",
     "title": "Caveolin-1",
     "definition": "A scaffolding protein that keeps certain enzymes in an 'off' state.",
-    "concept": "The Safety Lock.",
-    "mechanism": "Physically binds to eNOS to prevent it from producing gas until the Calcium-Calmodulin complex pulls it away.",
-    "biological_function": "Prevents the body from wasting energy or dilating blood vessels when no signal is present."
+    "concept": "The safety lock.",
+    "mechanism": "Physically binds to eNOS to prevent it from producing gas until the calcium-calmodulin complex pulls it away.",
+    "biological_function": "Prevents the body from wasting energy or dilating blood vessels when no signal is present.",
+    "category": "Process"
   },
   {
     "id": "cgmp",
-    "title": "cGMP (Cyclic Guanosine Monophosphate)",
+    "title": "cGMP (cyclic guanosine monophosphate)",
     "definition": "A 'second messenger' molecule that carries signals inside the smooth muscle cells.",
-    "concept": "The Relaxation Memo.",
-    "mechanism": "Produced when Nitric Oxide enters the muscle cell, it triggers the removal of calcium from the muscle fibers, causing them to relax.",
-    "biological_function": "The final internal signal that forces a blood vessel to widen (dilate)."
+    "concept": "The relaxation memo.",
+    "mechanism": "Produced when nitric oxide enters the muscle cell, it triggers the removal of calcium from the muscle fibers, causing them to relax.",
+    "biological_function": "The final internal signal that forces a blood vessel to widen (dilate).",
+    "category": "Process"
   },
   {
     "id": "nitric-oxide",
-    "title": "Nitric Oxide (NO)",
+    "title": "Nitric oxide (NO)",
     "definition": "A short-lived, highly reactive gas molecule that acts as a signaling agent.",
-    "concept": "The Invisible Messenger.",
+    "concept": "The invisible messenger.",
     "mechanism": "Easily diffuses through cell membranes to tell nearby muscles to stop contracting.",
-    "biological_function": "The direct cause of vasodilation and the increase in local metabolic activity."
+    "biological_function": "The direct cause of vasodilation and the increase in local metabolic activity.",
+    "category": "Process"
   },
   {
     "id": "polarized",
     "title": "Polarized",
     "definition": "The state of having two opposite charges separated by a barrier (the cell membrane).",
-    "concept": "The Ready Position.",
+    "concept": "The ready position.",
     "mechanism": "The neuron maintains a 'border' where the inside is electrically different from the outside, creating a state of readiness.",
-    "biological_function": "Allows the neuron to act like a battery, storing potential energy that can be released instantly when a signal is needed."
+    "biological_function": "Allows the neuron to act like a battery, storing potential energy that can be released instantly when a signal is needed.",
+    "category": "Barrier"
   },
   {
     "id": "negative-positive-game",
-    "title": "The Negative-Positive Game",
-    "definition": "The strategic balancing act of ions (Sodium and Potassium) to maintain a specific electrical charge.",
-    "concept": "The Tug-of-War.",
-    "mechanism": "The cell uses energy to keep the inside at -70mV by pushing 3 Sodium ions out for every 2 Potassium ions it pulls in, creating an electrical 'pressure' across the membrane.",
-    "biological_function": "Ensures the neuron is 'cocked' like a literal trigger, so the slightest focus or intent can set off a massive electrical chain reaction."
+    "title": "The negative-positive game",
+    "definition": "The strategic balancing act of ions (sodium and potassium) to maintain a specific electrical charge.",
+    "concept": "The tug-of-war.",
+    "mechanism": "The cell uses energy to keep the inside at -70mV by pushing 3 sodium ions out for every 2 potassium ions it pulls in, creating an electrical 'pressure' across the membrane.",
+    "biological_function": "Ensures the neuron is 'cocked' like a literal trigger, so the slightest focus or intent can set off a massive electrical chain reaction.",
+    "category": "Process"
   },
   {
-  "id": "h-gate",
-  "title": "Inactivation Gate (H-gate)",
-  "definition": "A specialized part of the voltage-gated sodium channel that acts as a physical 'timer' for electrical flow.",
-  "concept": "The Ball-and-Chain Mechanism.",
-  "mechanism": "As soon as the sodium channel opens, a protein 'ball' on a molecular chain begins to swing toward the opening. Within milliseconds, it plugs the hole, stopping the flow of sodium even if the gate is still technically 'open'.",
-  "biological_function": "Enforces the Absolute Refractory Period, ensuring the bio-electric signal moves in only one direction (toward the hand) and preventing 'back-firing' of the neuron."
-},
-{
-  "id": "bio-field",
-  "title": "Bio-field",
-  "definition": "A complex, coherent electromagnetic field generated by the collective electro-chemical activity of a living organism.",
-  "concept": "The Living Radiance.",
-  "mechanism": "As trillions of ions oscillate in sync—driven by focused intent and metabolic ATP—they create fluctuating micro-currents. According to the Ampère–Maxwell Law, these moving charges project a rhythmic magnetic field that extends beyond the physical boundary of the skin.",
-  "biological_function": "Acts as a non-local signature of the body's internal state; a stable, high-voltage field reflects a state of deep physiological coherence and focused mental computation."
-}
+    "id": "h-gate",
+    "title": "Inactivation gate (H-gate)",
+    "definition": "A specialized part of the voltage-gated sodium channel that acts as a physical 'timer' for electrical flow.",
+    "concept": "The ball-and-chain mechanism.",
+    "mechanism": "As soon as the sodium channel opens, a protein 'ball' on a molecular chain begins to swing toward the opening. Within milliseconds, it plugs the hole, stopping the flow of sodium even if the gate is still technically 'open'.",
+    "biological_function": "Enforces the absolute refractory period, ensuring the bio-electric signal moves in only one direction (toward the hand) and preventing 'back-firing' of the neuron.",
+    "category": "Barrier"
+  },
+  {
+    "id": "bio-field",
+    "title": "Bio-field",
+    "definition": "A complex, coherent electromagnetic field generated by the collective electro-chemical activity of a living organism.",
+    "concept": "The living radiance.",
+    "mechanism": "As trillions of ions oscillate in sync—driven by focused intent and metabolic ATP—they create fluctuating micro-currents. According to the Ampère–Maxwell law, these moving charges project a rhythmic magnetic field that extends beyond the physical boundary of the skin.",
+    "biological_function": "Acts as a non-local signature of the body's internal state; a stable, high-voltage field reflects a state of deep physiological coherence and focused mental computation.",
+    "category": "Field"
+  }
 ]
