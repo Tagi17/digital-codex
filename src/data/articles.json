@@ -108,7 +108,7 @@
           {
             "type": "dash-list",
             "items": [
-              "**The H-gate:** As the Sodium wave moves forward, the Sodium channels behind it immediately lock shut using an <Term id='inactivation-gate'>Inactivation Gate (H-gate)</Term>.",
+              "**The H-gate:** As the Sodium wave moves forward, the Sodium channels behind it immediately lock shut using an <Term id='h-gate'>Inactivation Gate (H-gate)</Term>.",
               "**The Absolute Refractory Period:** This creates a temporary \"dead zone\" where the nerve cannot fire again for a split second. This forced pause ensures the signal is a one-way command, maintaining the direction of your intent."
             ]
           },
