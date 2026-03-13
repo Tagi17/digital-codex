@@ -23,7 +23,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Inherently, neurons are Polarized. This is the \"Negative-Positive Game.\" The inside of the cell is naturally Negative (-70 mV), meaning it is 70 millivolts more negatively charged than the outside due to the high concentration of Potassium (K⁺), while the outer surface is Positive due to Sodium (Na⁺). Sodium desperately wants to get into the cell, building electrical pressure- an<Term id='electrical-gradient'>electrical gradient</Term> across the cell membrane. The neuron acts as a loaded spring, ready to fire once given the command. Your body uses ATP (cellular energy) to maintain this \"battery charge\" by using the <Term id='sodium-potassium-pump'>Sodium-Potassium Pump</Term> to move Potassium in and keep Sodium out."
+        "text": "Inherently, neurons are <Term id='polarized'>Polarized</Term>. This is the <Term id='negative-positive-game'>\"Negative-Positive Game.\"</Term> The inside of the cell is naturally Negative (-70 mV), meaning it is 70 millivolts more negatively charged than the outside due to the high concentration of Potassium (K⁺), while the outer surface is Positive due to Sodium (Na⁺). Sodium desperately wants to get into the cell, building electrical pressure- an<Term id='electrical-gradient'>electrical gradient</Term> across the cell membrane. The neuron acts as a loaded spring, ready to fire once given the command. Your body uses ATP (cellular energy) to maintain this \"battery charge\" by using the <Term id='sodium-potassium-pump'>Sodium-Potassium Pump</Term> to move Potassium in and keep Sodium out."
       },
       {
         "type": "heading",

@@ -286,5 +286,21 @@
     "concept": "The Invisible Messenger.",
     "mechanism": "Easily diffuses through cell membranes to tell nearby muscles to stop contracting.",
     "biological_function": "The direct cause of vasodilation and the increase in local metabolic activity."
+  },
+  {
+    "id": "polarized",
+    "title": "Polarized",
+    "definition": "The state of having two opposite charges separated by a barrier (the cell membrane).",
+    "concept": "The Ready Position.",
+    "mechanism": "The neuron maintains a 'border' where the inside is electrically different from the outside, creating a state of readiness.",
+    "biological_function": "Allows the neuron to act like a battery, storing potential energy that can be released instantly when a signal is needed."
+  },
+  {
+    "id": "negative-positive-game",
+    "title": "The Negative-Positive Game",
+    "definition": "The strategic balancing act of ions (Sodium and Potassium) to maintain a specific electrical charge.",
+    "concept": "The Tug-of-War.",
+    "mechanism": "The cell uses energy to keep the inside at -70mV by pushing 3 Sodium ions out for every 2 Potassium ions it pulls in, creating an electrical 'pressure' across the membrane.",
+    "biological_function": "Ensures the neuron is 'cocked' like a literal trigger, so the slightest focus or intent can set off a massive electrical chain reaction."
   }
 ]
