@@ -200,25 +200,34 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
           </ul>
         );
       case 'image':
+        const images = article.content.filter((b: any) => b.type === 'image');
+        const imageIndex = images.findIndex((b: any) => b === block) + 1;
+        
+        // Clean the caption to avoid redundant "Figure X:" prefixes
+        const cleanCaption = block.caption 
+          ? block.caption.replace(/^(Figure\s+\d+:|Image\s+of\s+)/i, '').trim()
+          : "";
+          
         return (
-          <figure key={index} className={`${commonClass} group w-full`}>
-            <div className="relative aspect-video w-full overflow-hidden border border-auric-gold/10 bg-black/40">
+          <figure key={index} className="flex flex-col items-center my-16 p-6 bg-black/40 border border-auric-gold/10 rounded-sm shadow-xl shadow-auric-gold/5 group w-full">
+            <div className="relative w-full flex items-center justify-center overflow-hidden">
               {block.url ? (
-                <Image 
-                  src={block.url} 
-                  alt={block.caption || ""} 
-                  fill 
-                  className="object-cover opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
-                />
+                <div className="relative w-full flex justify-center">
+                  <img 
+                    src={block.url} 
+                    alt={cleanCaption} 
+                    className="w-full h-auto max-h-[500px] block mx-auto object-contain opacity-90 hover:opacity-100 transition-all duration-700"
+                  />
+                </div>
               ) : (
-                <div className="w-full h-full flex items-center justify-center font-mono text-[10px] text-white/20 uppercase tracking-widest">
+                <div className="w-full h-[300px] flex items-center justify-center font-mono text-[10px] text-white/20 uppercase tracking-widest">
                   [ Image Data Stream Offline ]
                 </div>
               )}
             </div>
             {block.caption && (
-              <figcaption className="mt-3 font-mono text-[10px] text-bio-cyan/60 uppercase tracking-[0.3em] italic">
-                {block.caption}
+              <figcaption className="mt-6 text-center text-[10.5px] font-mono uppercase tracking-[0.2em] text-auric-gold/80">
+                FIGURE [{imageIndex}]: {cleanCaption}
               </figcaption>
             )}
           </figure>
