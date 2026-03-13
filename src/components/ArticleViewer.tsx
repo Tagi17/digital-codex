@@ -235,17 +235,17 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
         );
       case 'deep-dive':
         return (
-          <div key={index} className={`${commonClass} p-10 border border-auric-gold/30 bg-auric-gold/[0.02] backdrop-blur-sm relative overflow-hidden group`}>
-            <div className="absolute top-0 left-0 w-[2px] h-full bg-auric-gold/50" />
-            <div className="flex items-start gap-8 relative z-10">
-              <div className="p-4 border border-auric-gold/20 bg-black/60 text-auric-gold">
-                <Settings size={28} className="group-hover:rotate-180 transition-transform duration-1000 ease-in-out" />
+          <div key={index} className={`${commonClass} p-8 border border-auric-gold/20 bg-auric-gold/[0.01] backdrop-blur-md relative overflow-hidden group`}>
+            <div className="absolute top-0 left-0 w-[1px] h-full bg-auric-gold/40" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-[16px] text-auric-gold drop-shadow-[0_0_4px_rgba(212,175,55,0.3)]">◈</span>
+                <h4 className="font-mono text-[9px] text-auric-gold tracking-[0.3em] uppercase opacity-60">
+                  [ SUPPLEMENTAL DATA ]: {block.label}
+                </h4>
               </div>
-              <div>
-                <h4 className="font-mono text-[11px] text-auric-gold uppercase tracking-[0.4em] mb-4">Deep Dive: {block.label}</h4>
-                <div className="font-serif text-xl text-white/70 leading-relaxed italic mb-4">
-                  {renderFormattedText(block.text)}
-                </div>
+              <div className="font-serif text-xl text-white/70 leading-relaxed italic pl-7">
+                {renderFormattedText(block.text)}
               </div>
             </div>
           </div>
@@ -354,45 +354,47 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
                 exit={{ opacity: 0, y: -30, filter: "blur(15px)" }}
                 className="space-y-12"
               >
-                <div className="flex flex-col gap-6 mb-16">
-                  <div className="w-20 h-20 border border-bio-cyan/20 bg-black/40 flex items-center justify-center relative overflow-hidden self-start">
-                    <div className="absolute inset-0 bg-bio-cyan/5 animate-pulse" />
-                    <div className="text-3xl text-bio-cyan relative z-10 font-light">
+                <div className="flex flex-col items-center mb-8 w-full text-center border-b border-white/5 pb-4">
+                  <h4 className="font-mono text-[10px] font-medium tracking-[0.6em] text-auric-gold uppercase flex items-center justify-center gap-3 whitespace-nowrap">
+                    <span className="text-[16px] text-auric-gold drop-shadow-[0_0_4px_rgba(212,175,55,0.4)]">
                       {activeDefinition.category === 'Barrier' ? '⫶' : 
                        activeDefinition.category === 'Spark' ? '◈' : 
                        activeDefinition.category === 'Process' ? '⌬' : 
                        activeDefinition.category === 'Field' ? '⚙︎' : '⌬'}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-mono text-[10px] text-bio-cyan/60 tracking-[0.4em] uppercase mb-3">Neural Sync Active</h4>
-                    <h3 className="font-serif text-3xl text-bio-cyan tracking-tight leading-tight">
-                      {activeDefinition.title}
-                    </h3>
-                  </div>
+                    </span>
+                    {activeDefinition.category === 'Barrier' ? 'ISOLATION PROTOCOL' : 
+                     activeDefinition.category === 'Spark' ? 'TRANSMISSION NODE' : 
+                     activeDefinition.category === 'Process' ? 'METABOLIC ENGINE' : 
+                     activeDefinition.category === 'Field' ? 'RESONANCE FIELD' : 'NEURAL SYNC ACTIVE'}
+                  </h4>
+                </div>
+                <div className="mb-10 w-full text-center px-4">
+                  <h3 className="font-serif text-2xl text-bio-cyan tracking-tight leading-tight">
+                    {activeDefinition.title}
+                  </h3>
                 </div>
 
-                <div className="space-y-10">
-                  <div className="relative pl-8">
-                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-bio-cyan/30" />
-                    <h5 className="font-mono text-[10px] text-bio-cyan tracking-[0.3em] uppercase mb-4 opacity-60">[ Concept ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/90 tracking-widest leading-[1.8] lowercase first-letter:uppercase">
+                <div className="space-y-8">
+                  <div className="relative pl-6">
+                    <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-bio-cyan/20" />
+                    <h5 className="font-mono text-[9px] text-bio-cyan tracking-[0.4em] uppercase mb-2 opacity-40">[ Concept ]</h5>
+                    <p className="font-mono text-[11px] font-light leading-relaxed text-white/80 tracking-widest leading-[1.7] lowercase first-letter:uppercase">
                       {activeDefinition.concept}
                     </p>
                   </div>
 
-                  <div className="relative pl-8">
-                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-bio-cyan/30" />
-                    <h5 className="font-mono text-[10px] text-bio-cyan tracking-[0.3em] uppercase mb-4 opacity-60">[ Mechanism ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/90 tracking-widest leading-[1.8] lowercase first-letter:uppercase">
+                  <div className="relative pl-6">
+                    <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-bio-cyan/20" />
+                    <h5 className="font-mono text-[9px] text-bio-cyan tracking-[0.4em] uppercase mb-2 opacity-40">[ Mechanism ]</h5>
+                    <p className="font-mono text-[11px] font-light leading-relaxed text-white/80 tracking-widest leading-[1.7] lowercase first-letter:uppercase">
                       {activeDefinition.mechanism}
                     </p>
                   </div>
 
-                  <div className="relative pl-8">
-                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-bio-cyan/30" />
-                    <h5 className="font-mono text-[10px] text-bio-cyan tracking-[0.3em] uppercase mb-4 opacity-60">[ Biological Function ]</h5>
-                    <p className="font-mono text-[11px] leading-relaxed text-white/90 tracking-widest leading-[1.8] lowercase first-letter:uppercase">
+                  <div className="relative pl-6">
+                    <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-bio-cyan/20" />
+                    <h5 className="font-mono text-[9px] text-bio-cyan tracking-[0.4em] uppercase mb-2 opacity-40">[ Biological Function ]</h5>
+                    <p className="font-mono text-[11px] font-light leading-relaxed text-white/80 tracking-widest leading-[1.7] lowercase first-letter:uppercase">
                       {activeDefinition.biological_function}
                     </p>
                   </div>
