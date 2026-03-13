@@ -17,6 +17,7 @@ interface Definition {
   mechanism: string;
   biological_function: string;
   image?: string;
+  category?: string;
 }
 
 interface TermProps {
