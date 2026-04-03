@@ -47,10 +47,10 @@ export const Node = ({ id, title, x, y, isHovered, isRelated, isSpecial, dimmed,
       {/* Title */}
       {!dimmed && (
         <motion.span
-          className={`mt-8 text-[13px] tracking-[0.25em] font-mono uppercase transition-colors duration-500 ${
+          className={`mt-3 md:mt-8 text-[10px] md:text-[13px] tracking-[0.06em] md:tracking-[0.25em] font-mono uppercase transition-colors duration-500 text-center max-w-[7rem] md:max-w-none leading-tight ${
             isHovered || isSpecial ? 'text-auric-gold' : 'text-bio-cyan/70'
           }`}
-          animate={{ 
+          animate={{
             opacity: isRelated ? 1 : 0.4,
             y: isHovered ? 6 : 0,
             scale: isHovered ? 1.05 : 1

@@ -67,20 +67,40 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
     }
   }, [selectedNode, onNodeClick, setSelectedNodeId]);
 
+  // Returns safe-zone mapped coordinates for a given raw coordinate + viewport
+  const getMobileCoords = (cx: number, cy: number, w: number, h: number) => {
+    const isMobile = w < 768;
+    if (!isMobile) {
+      return { x: (cx / 1000) * w, y: (cy / 1000) * h };
+    }
+    // Safe zone: max 85vw width capped at 448px, centred horizontally
+    // Vertically: starts below the HUD header (~96px) and uses 60vh
+    const safeW   = Math.min(w * 0.85, 448);
+    const offsetX = (w - safeW) / 2;
+    const topPad  = 96;
+    const safeH   = h * 0.60 - topPad;
+    return {
+      x: offsetX + (cx / 1000) * safeW,
+      y: topPad  + (cy / 1000) * safeH,
+    };
+  };
+
   // Initialize D3 Simulation
   useEffect(() => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    const simulationNodes: SimulationNode[] = nodes.map(d => ({ 
-      ...d, 
-      x: (d.coordinates.x / 1000) * width,
-      y: (d.coordinates.y / 1000) * height,
-      fx: d.dimmed ? undefined : (d.coordinates.x / 1000) * width,
-      fy: d.dimmed ? undefined : (d.coordinates.y / 1000) * height,
-      vx: 0,
-      vy: 0
-    }));
+    const simulationNodes: SimulationNode[] = nodes.map(d => {
+      const { x, y } = getMobileCoords(d.coordinates.x, d.coordinates.y, width, height);
+      return {
+        ...d,
+        x, y,
+        fx: d.dimmed ? undefined : x,
+        fy: d.dimmed ? undefined : y,
+        vx: 0,
+        vy: 0,
+      };
+    });
 
     const links: SimulationLink[] = [];
     nodes.forEach(node => {
@@ -93,10 +113,12 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       });
     });
 
+    // Tighter forces on mobile so the contained triangle holds
+    const isMobile = width < 768;
     const simulation = d3.forceSimulation<SimulationNode>(simulationNodes)
-      .force("link", d3.forceLink<SimulationNode, SimulationLink>(links).id(d => d.id).distance(200))
-      .force("charge", d3.forceManyBody().strength(-1000))
-      .force("collide", d3.forceCollide().radius(100))
+      .force("link", d3.forceLink<SimulationNode, SimulationLink>(links).id(d => d.id).distance(isMobile ? 120 : 200))
+      .force("charge", d3.forceManyBody().strength(isMobile ? -400 : -1000))
+      .force("collide", d3.forceCollide().radius(isMobile ? 60 : 100))
       .velocityDecay(0.15)
       .alphaDecay(0.02)
       .on("tick", () => {
@@ -110,8 +132,9 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       const h = window.innerHeight;
       simulationNodes.forEach(node => {
         if (!node.dimmed) {
-          node.fx = (node.coordinates.x / 1000) * w;
-          node.fy = (node.coordinates.y / 1000) * h;
+          const { x, y } = getMobileCoords(node.coordinates.x, node.coordinates.y, w, h);
+          node.fx = x;
+          node.fy = y;
         }
       });
       simulation.alpha(0.3).restart();
@@ -238,13 +261,16 @@ export const NeuralNebula = ({ nodes, onNodeClick, isOverlayActive = false }: Ne
       <NodeTooltip {...tooltipData} />
 
       {/* HUD / Branding */}
-      <div className="absolute top-16 left-16 z-30 pointer-events-none">
-        <h1 className="text-auric-gold text-3xl tracking-[0.5em] uppercase mb-3">The Luminous Codex</h1>
-        <div className="h-[1px] w-32 bg-bio-cyan/40 mb-3" />
-        <p className="text-bio-cyan/60 font-mono text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.1.2</p>
+      <div className="absolute top-4 left-4 md:top-16 md:left-16 z-30 pointer-events-none">
+        <h1 className="text-auric-gold text-xl md:text-3xl tracking-[0.3em] md:tracking-[0.5em] uppercase mb-2 md:mb-3">The Luminous Codex</h1>
+        <div className="h-[1px] w-20 md:w-32 bg-bio-cyan/40 mb-2 md:mb-3" />
+        <p className="text-bio-cyan/60 font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">Bio-Electromagnetic Archive // v1.1.2</p>
       </div>
 
-      <div className="absolute bottom-16 left-16 z-30 pointer-events-none">
+      <div
+        className="absolute bottom-8 inset-x-0 md:bottom-16 md:left-16 md:right-auto text-center md:text-left z-30 pointer-events-none px-4 md:px-0"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 16px)' }}
+      >
         <p className="text-white/30 font-mono text-[10px] uppercase tracking-[0.4em]">
           Trace axonal pathways. Click nodes to expand synthesis.
         </p>

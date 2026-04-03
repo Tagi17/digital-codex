@@ -24,14 +24,16 @@ interface TermProps {
   id: string;
   children: React.ReactNode;
   onHover: (id: string | null) => void;
+  onTap?: (id: string) => void;
 }
 
-const Term: React.FC<TermProps> = ({ id, children, onHover }) => {
+const Term: React.FC<TermProps> = ({ id, children, onHover, onTap }) => {
   return (
     <span
       className="cursor-help transition-all duration-300 relative group inline-block hover:cursor-pointer border-b border-bio-cyan/30 hover:bg-bio-cyan/10 px-1 rounded-sm"
       onMouseEnter={() => onHover(id)}
       onMouseLeave={() => onHover(null)}
+      onClick={(e) => { e.stopPropagation(); onTap?.(id); }}
     >
       <span className="text-bio-cyan group-hover:text-white relative z-10 font-medium italic transition-colors duration-300">
         {children}
@@ -49,7 +51,9 @@ interface ArticleViewerProps {
 
 const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, contentId }) => {
   const [activeTermId, setActiveTermId] = useState<string | null>(null);
+  const [mobileTermId, setMobileTermId] = useState<string | null>(null);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   
   const targetId = contentId || nodeData.articleId;
@@ -63,7 +67,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       const termMatch = part.match(/<Term id='(.*?)'>(.*?)<\/Term>/);
       if (termMatch) {
         return (
-          <Term key={index} id={termMatch[1]} onHover={setActiveTermId}>
+          <Term key={index} id={termMatch[1]} onHover={setActiveTermId} onTap={setMobileTermId}>
             {termMatch[2]}
           </Term>
         );
@@ -86,6 +90,11 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
     if (!activeTermId || !Array.isArray(journeyData)) return null;
     return (journeyData as Definition[]).find((item: Definition) => item.id === activeTermId) || null;
   }, [activeTermId]);
+
+  const mobileDefinition = useMemo(() => {
+    if (!mobileTermId || !Array.isArray(journeyData)) return null;
+    return (journeyData as Definition[]).find((item: Definition) => item.id === mobileTermId) || null;
+  }, [mobileTermId]);
 
   const headings = useMemo(() => {
     if (!article || !article.content) return [];
@@ -265,9 +274,70 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       className="fixed inset-0 z-[100] bg-obsidian/98 backdrop-blur-3xl flex selection:bg-auric-gold/20 pointer-events-auto overflow-hidden"
       style={{ pointerEvents: 'all' }}
     >
+      {/* MOBILE: Fixed top bar with Back and Index buttons */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-[150] flex items-center justify-between px-4 py-3 bg-obsidian/95 backdrop-blur-md border-b border-auric-gold/10">
+        <button
+          onClick={onClose}
+          className="font-mono text-[10px] text-auric-gold border border-auric-gold/30 px-3 py-2 bg-black/40 flex items-center gap-2 tracking-[0.2em] cursor-pointer"
+        >
+          <ArrowLeft size={12} className="shrink-0" />
+          [ BACK ]
+        </button>
+        <button
+          onClick={() => setIsMobileMenuOpen(true)}
+          className="font-mono text-[10px] text-auric-gold border border-auric-gold/30 px-3 py-2 bg-black/40 tracking-[0.2em] cursor-pointer"
+        >
+          [ INDEX ]
+        </button>
+      </div>
+
+      {/* MOBILE: Full-screen slide-out index menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'tween', duration: 0.25 }}
+            className="fixed inset-0 z-[200] md:hidden bg-obsidian/98 backdrop-blur-3xl flex flex-col p-8 pt-16"
+          >
+            <div className="flex justify-between items-center mb-10">
+              <div className="text-[10px] font-mono text-bio-cyan/40 tracking-[0.4em] uppercase border-b border-bio-cyan/20 pb-2">Research Index</div>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-mono text-[11px] text-auric-gold border border-auric-gold/30 px-3 py-2 bg-black/40 cursor-pointer"
+              >
+                [ CLOSE ]
+              </button>
+            </div>
+            <nav className="space-y-8 overflow-y-auto custom-scrollbar pr-4 flex-1">
+              {headings.map((h: any) => {
+                const id = `heading-${h.index}`;
+                const isActive = activeSectionId === id;
+                return (
+                  <button
+                    key={h.index}
+                    onClick={() => { scrollToSection(id); setIsMobileMenuOpen(false); }}
+                    className="group flex flex-col items-start w-full text-left transition-all duration-300 cursor-pointer"
+                  >
+                    <div className={`flex items-center gap-3 font-mono text-[11px] mb-1 transition-all duration-300 ${isActive ? 'text-auric-gold' : 'text-auric-gold/40'}`}>
+                      {isActive && <div className="w-1 h-1 bg-auric-gold rounded-full shadow-[0_0_8px_#D4AF37]" />}
+                      {h.text.match(/\[(.*?)\]/)?.[0] || `[0.${h.index}]`}
+                    </div>
+                    <div className={`font-mono text-[10px] uppercase tracking-[0.2em] leading-snug transition-all duration-300 ${isActive ? 'text-white' : 'text-white/40'}`}>
+                      {h.text.replace(/\[.*?\]/g, '').trim()}
+                    </div>
+                  </button>
+                );
+              })}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* 1. LEFT SIDEBAR: THE INDEX */}
-      <aside className="w-[240px] h-full border-r-[0.5px] border-auric-gold/20 flex flex-col p-8 pt-24 shrink-0 bg-black/20 relative z-30 pointer-events-auto">
-        <button 
+      <aside className="hidden md:flex md:flex-col w-[240px] h-full border-r-[0.5px] border-auric-gold/20 p-8 pt-24 shrink-0 bg-black/20 relative z-30 pointer-events-auto">
+        <button
           onClick={onClose}
           className="font-mono text-[11px] text-auric-gold hover:text-white transition-all tracking-[0.2em] mb-20 flex items-center gap-3 group cursor-pointer border-[0.5px] border-auric-gold/30 p-4 bg-black/40 backdrop-blur-md hover:cursor-pointer"
         >
@@ -302,24 +372,24 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       {/* 2. CENTER PANE: THE RESEARCH (INTERACTIVE AREA) */}
       <main className="flex-1 h-full relative flex flex-col items-center overflow-hidden z-10">
         <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-auric-gold/10 overflow-hidden pointer-events-none">
-          <motion.div 
+          <motion.div
             className="w-full h-full bg-auric-gold origin-top shadow-[0_0_10px_#D4AF37]"
             style={{ scaleY }}
           />
         </div>
 
-        <div 
+        <div
           ref={scrollContainerRef}
-          className="w-full h-full overflow-y-auto custom-scrollbar px-16 lg:px-32 py-24 scroll-smooth relative z-20"
+          className="w-full h-full overflow-y-auto custom-scrollbar px-5 md:px-16 lg:px-32 pt-20 pb-16 md:py-24 scroll-smooth relative z-20"
           style={{ scrollbarGutter: 'stable' }}
         >
           <div className="max-w-2xl mx-auto pointer-events-auto">
-            <header className="mb-24 relative">
+            <header className="mb-12 md:mb-24 relative">
               <div className="font-mono text-[11px] text-bio-cyan/50 tracking-[0.6em] uppercase mb-6 flex items-center gap-4">
                 <span className="w-10 h-[1px] bg-bio-cyan/20" />
                 NEURAL RESEARCH CODEX
               </div>
-              <h1 className="font-serif text-5xl lg:text-7xl text-auric-gold leading-[1.05] mb-12 tracking-tight">
+              <h1 className="font-serif text-3xl md:text-5xl lg:text-7xl text-auric-gold leading-[1.1] md:leading-[1.05] mb-8 md:mb-12 tracking-tight">
                 {article.title}
               </h1>
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4 font-mono text-[10px] text-white/30 tracking-[0.3em] uppercase border-y border-auric-gold/10 py-6">
@@ -343,7 +413,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
       </main>
 
       {/* 3. RIGHT SIDEBAR: THE SYNC PANE */}
-      <aside className="w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/50 shrink-0 p-12 flex flex-col relative z-30 pointer-events-auto">
+      <aside className="hidden md:flex md:flex-col w-[350px] h-full border-l-[0.5px] border-auric-gold/20 bg-black/50 shrink-0 p-12 relative z-30 pointer-events-auto">
         <div className="h-full flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {activeDefinition ? (
@@ -423,6 +493,95 @@ const ArticleViewer: React.FC<ArticleViewerProps> = ({ nodeData, onClose, conten
           </AnimatePresence>
         </div>
       </aside>
+
+      {/* MOBILE: Term Definition Bottom Sheet */}
+      <AnimatePresence>
+        {mobileDefinition && (
+          <>
+            {/* Backdrop — tap outside to dismiss */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[249] md:hidden bg-black/50"
+              onClick={() => setMobileTermId(null)}
+            />
+
+            {/* Bottom sheet panel */}
+            <motion.div
+              key="sheet"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 32, stiffness: 320 }}
+              drag="y"
+              dragConstraints={{ top: 0 }}
+              dragElastic={{ top: 0, bottom: 0.5 }}
+              onDragEnd={(_: any, info: any) => {
+                if (info.offset.y > 90) setMobileTermId(null);
+              }}
+              className="fixed bottom-0 left-0 right-0 z-[250] md:hidden rounded-t-2xl overflow-hidden"
+              style={{
+                background: 'rgba(10, 10, 10, 0.96)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                borderTop: '1.5px solid #00F5FF',
+                boxShadow: '0 -8px 40px rgba(0, 245, 255, 0.08)',
+              }}
+            >
+              {/* Drag handle */}
+              <div className="flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing">
+                <div className="w-10 h-1 bg-white/20 rounded-full" />
+              </div>
+
+              {/* Header row */}
+              <div className="flex items-start justify-between px-6 pt-3 pb-4 border-b border-white/5">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <span className="text-bio-cyan text-lg shrink-0">
+                    {mobileDefinition.category === 'Barrier' ? '⫶' :
+                     mobileDefinition.category === 'Spark'   ? '◈' :
+                     mobileDefinition.category === 'Process' ? '⌬' :
+                     mobileDefinition.category === 'Field'   ? '⚙︎' : '⌬'}
+                  </span>
+                  <h3 className="font-serif text-xl text-bio-cyan leading-snug truncate">
+                    {mobileDefinition.title}
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setMobileTermId(null)}
+                  className="font-mono text-[11px] text-white/40 border border-white/10 px-2.5 py-1.5 ml-4 shrink-0 rounded-sm hover:text-white hover:border-white/30 transition-colors cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Scrollable content */}
+              <div className="px-6 py-6 space-y-6 overflow-y-auto custom-scrollbar" style={{ maxHeight: '55vh' }}>
+                <div>
+                  <h5 className="font-mono text-[9px] text-bio-cyan tracking-[0.4em] uppercase mb-2 opacity-40">CONCEPT</h5>
+                  <p className="font-mono text-[12px] text-white/80 leading-relaxed lowercase first-letter:uppercase">
+                    {mobileDefinition.concept}
+                  </p>
+                </div>
+                <div className="border-t border-white/5 pt-6">
+                  <h5 className="font-mono text-[9px] text-bio-cyan tracking-[0.4em] uppercase mb-2 opacity-40">MECHANISM</h5>
+                  <p className="font-mono text-[12px] text-white/80 leading-relaxed lowercase first-letter:uppercase">
+                    {mobileDefinition.mechanism}
+                  </p>
+                </div>
+                <div className="border-t border-white/5 pt-6">
+                  <h5 className="font-mono text-[9px] text-bio-cyan tracking-[0.4em] uppercase mb-2 opacity-40">FUNCTION</h5>
+                  <p className="font-mono text-[12px] text-white/80 leading-relaxed lowercase first-letter:uppercase">
+                    {mobileDefinition.biological_function}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
